@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  pwn-baby:
+    build:
+      context: .
+      args:
+        FLAG: "FLAG{b4by_st4ck_0v3rfl0w_g0tcha}"
+    ports:
+      - "9999:9999"

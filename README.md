@@ -41,8 +41,13 @@ git branch -M main
 git push -u origin main
 ```
 
-## الخدمات القادمة (حسب تقدمكم)
+## سجل التطوير (Changelog)
 
-- [ ] خدمة Web فيها Authentication Bypass منطقي (مو SQLi)
-- [ ] خدمة Network بروتوكول مخصص بـ `nc`
-- [ ] دمج أكثر من خدمة في بيئة وحدة لمحاكاة جولة A/D حقيقية
+- ✅ `web-notes`: خدمة ويب (SQL Injection)
+- ✅ `pwn-baby`: خدمة binary (Stack Overflow / ret2win)
+- ⬜ خدمة Web فيها Authentication Bypass منطقي (مو SQLi)
+- ⬜ خدمة Network بروتوكول مخصص بـ `nc`
+- ⬜ دمج أكثر من خدمة في بيئة وحدة لمحاكاة جولة A/D حقيقية
+
+كل خدمة جديدة بترجع لي أول ما تطلبونها، بعد ما تحلّون اللي عندكم
+الحين وتخبروني وين علقتم أو وش استفدتم.

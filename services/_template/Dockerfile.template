@@ -1,0 +1,37 @@
+# Build context is the REPO ROOT (see services/web-notes/Dockerfile or
+# services/pwn-baby/Dockerfile for working examples). Rename this file to
+# `Dockerfile` once you've filled it in.
+
+FROM <base-image>   # e.g. python:3.11-slim, ubuntu:22.04, node:20-slim...
+
+# --- install whatever your service actually needs -------------------------
+# RUN apt-get update && apt-get install -y --no-install-recommends ... && \
+#     rm -rf /var/lib/apt/lists/*
+
+WORKDIR /service
+COPY services/<your-service>/src/ .
+# --- build/compile steps here if needed ------------------------------------
+
+# flagd sidecar: lets the checker rotate this service's flag every round.
+COPY platform/common/flagd.py /opt/flagd.py
+COPY services/<your-service>/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENV FLAG_PATH="/flag.txt"
+ENV FLAGD_PORT="10000"
+# FLAGD_SECRET is supplied at deploy time (docker-compose / .env), never
+# baked into the image.
+
+# Pre-create the flag file so the service (running as an unprivileged user,
+# ideally) can read/write it without needing root at runtime. Writing to an
+# EXISTING file only needs file permissions, not directory permissions.
+ARG INITIAL_FLAG=FLAG{waiting_for_first_round}
+RUN echo "$INITIAL_FLAG" > /flag.txt && chmod 644 /flag.txt
+# If you run as a dedicated non-root user, chown the flag file to it here:
+# RUN useradd -m -s /usr/sbin/nologin player && chown player:player /flag.txt
+# USER player
+
+EXPOSE <your-public-port>
+# Do NOT expose/publish FLAGD_PORT (10000) anywhere — internal only.
+
+CMD ["/entrypoint.sh"]

@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+python3 /opt/flagd.py &
+
+exec <your service's actual start command here>

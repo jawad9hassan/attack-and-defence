@@ -1,9 +1,11 @@
 version: "3.8"
 services:
-  notes-app:
-    build: .
+  web-notes:
+    build:
+      context: ../..
+      dockerfile: services/web-notes/Dockerfile
     ports:
       - "5000:5000"
     environment:
-      - FLAG=FLAG{sql1_1nj3ct10n_1s_f0rever}
       - ADMIN_PASSWORD=sup3rSecretAdminPW!
+      - FLAGD_SECRET=standalone-dev-secret

@@ -4,7 +4,23 @@ from flask import Flask, request, render_template_string, g
 
 app = Flask(__name__)
 DB_PATH = os.path.join(os.path.dirname(__file__), "users.db")
-FLAG = os.environ.get("FLAG", "FLAG{this_is_a_placeholder_flag}")
+FLAG_PATH = os.environ.get("FLAG_PATH", "/flag.txt")
+
+
+def read_current_flag():
+    """Read the live flag fresh on every request.
+
+    The flag file is owned by the `flagd` sidecar (see
+    platform/common/flagd.py), which the checker rewrites once per
+    round. Reading it fresh here (instead of caching it at startup)
+    is what makes flag rotation actually work without restarting the
+    app.
+    """
+    try:
+        with open(FLAG_PATH) as f:
+            return f.read().strip()
+    except OSError:
+        return "FLAG{missing_flag_file}"
 
 
 def get_db():
@@ -94,7 +110,9 @@ def login():
 
     if row:
         uname, role = row
-        return render_template_string(WELCOME_PAGE, username=uname, role=role, flag=FLAG)
+        return render_template_string(
+            WELCOME_PAGE, username=uname, role=role, flag=read_current_flag()
+        )
     else:
         return render_template_string(LOGIN_PAGE, error="Invalid credentials", result=None)
 

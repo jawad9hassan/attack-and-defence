@@ -2,8 +2,11 @@ version: "3.8"
 services:
   pwn-baby:
     build:
-      context: .
+      context: ../..
+      dockerfile: services/pwn-baby/Dockerfile
       args:
-        FLAG: "FLAG{b4by_st4ck_0v3rfl0w_g0tcha}"
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
     ports:
       - "9999:9999"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

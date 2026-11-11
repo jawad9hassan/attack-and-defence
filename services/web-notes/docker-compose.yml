@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  notes-app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - FLAG=FLAG{sql1_1nj3ct10n_1s_f0rever}
+      - ADMIN_PASSWORD=sup3rSecretAdminPW!

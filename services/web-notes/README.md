@@ -1,91 +1,78 @@
-# تحدي A/D رقم 1: Notes App (SQL Injection)
+# Challenge 1: Notes App (SQL Injection)
 
-تطبيق ويب بسيط فيه صفحة تسجيل دخول، وفيه ثغرة SQL Injection مقصودة في
-`app/app.py`. الهدف منه تدريب على دور **المهاجم** (استخراج الفلاق) ودور
-**المدافع** (تصحيح الثغرة بدون ما توقف الخدمة).
+A small web app with a login page and a SQL Injection vulnerability in
+`app/app.py`. Train both roles: **attacker** (extract the flag) and
+**defender** (patch the bug without breaking the service).
 
-## كيف تشغله
+## Running it
 
-يحتاج Docker و Docker Compose مثبتين على جهازك (WSL يدعمهم عادة).
+Standalone (its own compose file):
 
 ```bash
-cd webchall
+cd services/web-notes
 docker compose up --build
 ```
 
-بعد ما يشتغل، افتح المتصفح أو استخدم `curl` على:
-
-```
-http://localhost:5000
-```
-
-لو ما عندك Docker، تقدر تشغله مباشرة بـ Python:
+Or as part of the full platform (recommended — gives you round-based flag
+rotation and the live scoreboard):
 
 ```bash
-cd webchall/app
-pip install -r requirements.txt
-python app.py
+# from the repo root
+docker compose up --build web-notes
 ```
 
-## دور المهاجم (Attacker)
+Then open `http://localhost:5000`.
 
-**المهمة:** تسجل دخول كـ `admin` بدون ما تعرف الباسورد الحقيقي، وتشوف الفلاق.
+## Attacker role
 
-### خطوات التحليل
+**Goal:** log in as `admin` without knowing the real password, and read
+the flag.
 
-1. افتح الصفحة الرئيسية وجرب تسجيل دخول عادي (مثلاً `guest`/`guestpass`
-   موجود في بيانات التهيئة). لاحظ شكل النموذج: حقلين `username` و`password`
-   يرسلان بطلب `POST` إلى `/login`.
+### Suggested analysis steps
 
-2. فكر: الخادم يبني استعلام SQL من مدخلاتك مباشرة. جرب تدخل أحرف خاصة
-   بلغة SQL (مثل علامة اقتباس مفردة `'`) في حقل `username` وشوف هل يطلع
-   خطأ من قاعدة البيانات. ظهور رسالة خطأ SQL دليل قوي على وجود الثغرة.
-
-3. فكر كيف تبني قيمة تخلي شرط `WHERE` يرجع صحيح دائماً، أو تخلي الاستعلام
-   يختار صف `admin` بغض النظر عن الباسورد. راجع قواعد SQL الأساسية عن
-   `OR`، والتعليقات (`--`)، وكيف تُغلق علامة الاقتباس اللي فتحها الكود.
-
-4. جرب قيمك عبر النموذج في المتصفح، أو بـ curl:
+1. Open the page and try a normal login. `guest` / `guestpass` is seeded
+   in the database, so it works, and shows you what the form posts to
+   (`POST /login` with `username` and `password`).
+2. The server builds a SQL query directly from your input. Try putting a
+   single quote `'` in the `username` field and see what happens. A SQL
+   error message back from the server is a strong signal the injection
+   works.
+3. Think about how to craft a value that makes the `WHERE` clause always
+   true, or that selects the `admin` row regardless of the password.
+   Review basic SQL: `OR`, comments (`--`), and how to close the quote the
+   code already opened for you.
+4. Try your payload through the form, or with curl:
    ```bash
    curl -X POST http://localhost:5000/login \
-     -d "username=<قيمتك>" \
+     -d "username=<your payload>" \
      -d "password=anything"
    ```
+5. On success, the response shows `role: admin` and the current flag.
 
-5. إذا نجحت، الصفحة اللي ترجع تقول `role: admin` وتطبع الفلاق.
+**Don't ask for the exact payload.** Try it yourself first. If you're
+stuck for more than 20-30 minutes, come back and say exactly where you got
+stuck, and you'll get a sharper hint (not the solution).
 
-**لا تطلب مني الـ payload جاهز** — جرب بنفسك أول. لو علقت أكثر من 20-30
-دقيقة، ارجع لي وأعطيك تلميح أدق (مو الحل الكامل) حسب وين بالضبط علقت.
+## Defender role
 
-## دور المدافع (Defender)
+Once the team has found the bug (or even before, as a separate exercise):
 
-بعد ما يكتشف فريقكم الثغرة (أو حتى قبل، كتمرين منفصل)، المطلوب:
-
-1. **تصلّح** `app/app.py` بدون ما تكسر تسجيل الدخول العادي (`guest`/`guestpass`
-   لازم يستمر يشتغل).
-2. الإصلاح الصحيح في SQLi هو استخدام **parameterized queries** (استعلامات
-   بمعاملات) بدل بناء النص يدوياً. راجع توثيق `sqlite3` في بايثون عن
+1. **Fix** `app/app.py` without breaking normal login (`guest` /
+   `guestpass` must keep working).
+2. The correct fix for SQLi is **parameterized queries** instead of
+   building the SQL string by hand. Look at Python's `sqlite3` docs for
    placeholders (`?`).
-3. بعد التصليح، أعد تشغيل الخدمة (`docker compose up --build`) وتأكد:
-   - تسجيل الدخول الصحيح لسا يشتغل (checker يمثل "الخدمة شغالة")
-   - نفس الـ payload اللي استخرجتوا فيه الفلاق قبل الآن يفشل
+3. After patching, redeploy and confirm:
+   - the legitimate login still works (the checker's SLA check will tell
+     you immediately if you broke it)
+   - the exact payload that worked before now fails
 
-## محاكاة A/D فعلية بين عضوين أو أكثر
+## Flag rotation
 
-- شخص "أ" يشغل نسخة الخدمة الأصلية (الضعيفة) على جهازه.
-- شخص "ب" (المهاجم) يحاول يستخرج الفلاق عن بعد (نفس الشبكة المحلية، أو
-  عبر `localhost` إذا بنفس الجهاز بمنفذين مختلفين).
-- شخص "أ" بعد ما يكتشف إنه فُقد الفلاق (أو بشكل استباقي) يصلّح الكود
-  ويعيد التشغيل، وشخص "ب" يحاول يستغل نفس الثغرة مرة ثانية للتأكد إنها
-  انسدّت.
-- كرروها بأدوار معكوسة.
-
-## بعد ما تحلّونه
-
-قولوا لي:
-- وش الـ payload اللي نجح معكم (أرسلوه لي وأشرح لكم بالضبط ليش اشتغل)
-- وش طريقة التصليح اللي استخدمتوها
-
-وبعدها أجهز لكم **التحدي الثاني**: نفس الفكرة لكن بثغرة مختلفة (auth
-bypass منطقي، أو command injection)، وبعدها ندمج أكثر من خدمة مع بعض في
-بيئة A/D متكاملة.
+If you're running this as part of the full platform (not standalone),
+the flag shown on the admin page changes every round — the checker
+rotates it automatically via `flagd` (see `docs/ARCHITECTURE.md`). The
+exploit technique stays identical; only the reward changes each round,
+exactly like a real attack-defense game. Submit whatever flag you
+currently extract — stale ones expire (`config/game.yml`'s
+`flag_lifetime_rounds`).

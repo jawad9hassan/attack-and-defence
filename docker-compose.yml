@@ -1,0 +1,63 @@
+# One command, the whole game: scoreboard + checker + every service, all on
+# the same Docker network so the checker can reach each service's flagd by
+# container name (see config/game.yml's `host` fields).
+#
+# Copy .env.example to .env first (or just run with the built-in defaults
+# below, fine for solo practice).
+
+services:
+  scoreboard:
+    build:
+      context: .
+      dockerfile: platform/scoreboard/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - CHECKER_SECRET=${CHECKER_SECRET:-change-me-checker-secret}
+      - DEFENSE_POINTS_PER_ROUND=${DEFENSE_POINTS_PER_ROUND:-1}
+      - ATTACK_POINTS_PER_FLAG=${ATTACK_POINTS_PER_FLAG:-10}
+    volumes:
+      - scoreboard-data:/data
+    restart: unless-stopped
+
+  web-notes:
+    build:
+      context: .
+      dockerfile: services/web-notes/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-sup3rSecretAdminPW!}
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+    # FLAGD_PORT (10000) is deliberately not published here: only
+    # containers on this compose network (i.e. the checker) can reach it.
+
+  pwn-baby:
+    build:
+      context: .
+      dockerfile: services/pwn-baby/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "9999:9999"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
+  checker:
+    build:
+      context: .
+      dockerfile: platform/checker/Dockerfile
+    environment:
+      - SCOREBOARD_URL=http://scoreboard:8080
+      - CHECKER_SECRET=${CHECKER_SECRET:-change-me-checker-secret}
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    depends_on:
+      - scoreboard
+      - web-notes
+      - pwn-baby
+    restart: unless-stopped
+
+volumes:
+  scoreboard-data:

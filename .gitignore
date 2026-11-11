@@ -4,3 +4,5 @@ __pycache__/
 *.o
 services/*/app/users.db
 services/pwn-baby/build/
+.env
+data/

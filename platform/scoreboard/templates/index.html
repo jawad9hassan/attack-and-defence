@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Attack &amp; Defence — Live Scoreboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #0b0f14;
+    --panel: #121820;
+    --border: #22303c;
+    --text: #e6edf3;
+    --muted: #8b98a5;
+    --up: #2ea043;
+    --down: #da3633;
+    --accent: #58a6ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px;
+  }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+  .round-pill {
+    display: inline-block; background: var(--accent); color: #04121f;
+    font-weight: 700; padding: 4px 12px; border-radius: 999px; font-size: 13px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .panel h2 { font-size: 14px; text-transform: uppercase; letter-spacing: .04em;
+    color: var(--muted); margin: 0 0 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 7px 4px; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 500; font-size: 12px; text-transform: uppercase; }
+  .status-up { color: var(--up); font-weight: 700; }
+  .status-down { color: var(--down); font-weight: 700; }
+  .mono { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted); }
+  .rank-1 { color: #ffd700; }
+  .rank-2 { color: #c0c0c0; }
+  .rank-3 { color: #cd7f32; }
+  .empty { color: var(--muted); font-size: 13px; padding: 8px 0; }
+</style>
+</head>
+<body>
+  <h1>Attack &amp; Defence Training — Live Scoreboard</h1>
+  <div class="sub">Round <span class="round-pill" id="round">—</span> &nbsp;·&nbsp; refreshes every 5s</div>
+
+  <div class="grid">
+    <div class="panel">
+      <h2>Service health (defense)</h2>
+      <table id="services-table">
+        <thead><tr><th>Service</th><th>Status</th><th>Uptime</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="panel">
+      <h2>Leaderboard</h2>
+      <table id="leaderboard-table">
+        <thead><tr><th>#</th><th>Submitter</th><th>Points</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="panel" style="grid-column: 1 / -1;">
+      <h2>Recent captures</h2>
+      <table id="captures-table">
+        <thead><tr><th>Service</th><th>Captured by</th><th>Flag</th><th>When</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+<script>
+async function refresh() {
+  try {
+    const res = await fetch('/api/state');
+    const data = await res.json();
+
+    document.getElementById('round').textContent = data.round;
+
+    const sTbody = document.querySelector('#services-table tbody');
+    sTbody.innerHTML = '';
+    if (data.services.length === 0) {
+      sTbody.innerHTML = '<tr><td colspan="3" class="empty">No rounds yet — waiting for the checker…</td></tr>';
+    }
+    for (const s of data.services) {
+      const pct = s.total_rounds ? Math.round(100 * s.up_rounds / s.total_rounds) : 0;
+      const statusClass = s.latest_status === 'up' ? 'status-up' : 'status-down';
+      sTbody.innerHTML += `<tr>
+        <td>${s.service}</td>
+        <td class="${statusClass}">${s.latest_status.toUpperCase()}</td>
+        <td>${pct}% (${s.up_rounds}/${s.total_rounds})</td>
+      </tr>`;
+    }
+
+    const lTbody = document.querySelector('#leaderboard-table tbody');
+    lTbody.innerHTML = '';
+    if (data.leaderboard.length === 0) {
+      lTbody.innerHTML = '<tr><td colspan="3" class="empty">No points yet.</td></tr>';
+    }
+    data.leaderboard.forEach((row, i) => {
+      const rankClass = i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : '';
+      lTbody.innerHTML += `<tr>
+        <td class="${rankClass}">${i + 1}</td>
+        <td>${row.submitter}</td>
+        <td>${row.points}</td>
+      </tr>`;
+    });
+
+    const cTbody = document.querySelector('#captures-table tbody');
+    cTbody.innerHTML = '';
+    if (data.recent_captures.length === 0) {
+      cTbody.innerHTML = '<tr><td colspan="4" class="empty">No captures yet.</td></tr>';
+    }
+    for (const c of data.recent_captures) {
+      const when = new Date(c.captured_at * 1000).toLocaleTimeString();
+      cTbody.innerHTML += `<tr>
+        <td>${c.service}</td>
+        <td>${c.captured_by}</td>
+        <td class="mono">${c.value}</td>
+        <td>${when}</td>
+      </tr>`;
+    }
+  } catch (e) {
+    console.error('refresh failed', e);
+  }
+}
+refresh();
+setInterval(refresh, 5000);
+</script>
+</body>
+</html>

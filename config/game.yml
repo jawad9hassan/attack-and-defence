@@ -1,0 +1,24 @@
+# Game configuration for the checker engine and scoreboard.
+#
+# This single-team config is deliberately simple: everyone trains against
+# the same shared instance of each service, and competes individually on
+# the attacker leaderboard. See docs/ARCHITECTURE.md for how this scales
+# to real per-team vulnboxes later.
+
+round_time_seconds: 90
+flag_lifetime_rounds: 5
+defense_points_per_round: 1
+attack_points_per_flag: 10
+
+services:
+  - name: web-notes
+    host: web-notes
+    port: 5000
+    flagd_port: 10000
+    checker_module: web_notes_checker
+
+  - name: pwn-baby
+    host: pwn-baby
+    port: 9999
+    flagd_port: 10000
+    checker_module: pwn_baby_checker

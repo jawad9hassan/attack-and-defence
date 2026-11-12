@@ -143,6 +143,12 @@ services:
     flagd_port: 10000
     checker_module: forensics_timeline_checker
 
+  - name: forensics-malware-triage
+    host: forensics-malware-triage
+    port: 5000
+    flagd_port: 10000
+    checker_module: forensics_malware_triage_checker
+
   - name: net-rate-limit-bypass
     host: net-rate-limit-bypass
     port: 9600

@@ -263,6 +263,16 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  forensics-malware-triage:
+    build:
+      context: .
+      dockerfile: services/forensics-malware-triage/Dockerfile
+    ports:
+      - "9008:5000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   net-rate-limit-bypass:
     build:
       context: .
@@ -591,6 +601,7 @@ services:
       - forensics-log-analysis
       - forensics-metadata
       - forensics-timeline
+      - forensics-malware-triage
       - net-rate-limit-bypass
       - net-ssrf-pivot
       - net-dns-spoof-sim

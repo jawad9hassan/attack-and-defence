@@ -137,6 +137,12 @@ services:
     flagd_port: 10000
     checker_module: forensics_metadata_checker
 
+  - name: forensics-timeline
+    host: forensics-timeline
+    port: 5000
+    flagd_port: 10000
+    checker_module: forensics_timeline_checker
+
   - name: net-rate-limit-bypass
     host: net-rate-limit-bypass
     port: 9600

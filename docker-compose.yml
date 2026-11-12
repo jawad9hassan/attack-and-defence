@@ -415,6 +415,18 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  pwn-ret2libc:
+    build:
+      context: .
+      dockerfile: services/pwn-ret2libc/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "7007:9990"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   checker:
     build:
       context: .
@@ -459,6 +471,7 @@ services:
       - re-packed
       - pwn-canary-bypass
       - pwn-heap
+      - pwn-ret2libc
     restart: unless-stopped
 
 volumes:

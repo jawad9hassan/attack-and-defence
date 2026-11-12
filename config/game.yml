@@ -214,3 +214,9 @@ services:
     port: 9991
     flagd_port: 10000
     checker_module: pwn_heap_checker
+
+  - name: pwn-ret2libc
+    host: pwn-ret2libc
+    port: 9990
+    flagd_port: 10000
+    checker_module: pwn_ret2libc_checker

@@ -1,0 +1,11 @@
+services:
+  pwn-ret2libc:
+    build:
+      context: ../..
+      dockerfile: services/pwn-ret2libc/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "7007:9990"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

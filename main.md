@@ -63,7 +63,7 @@ next.
 | 3 | 5002 | ✅ [web-sqli-union](services/web-sqli-union/README.md) | Beginner-Intermediate | SQL Injection — UNION data extraction |
 | 4 | 5003 | ✅ [web-sqli-blind](services/web-sqli-blind/README.md) | Intermediate | SQL Injection — blind boolean, no errors shown |
 | 5 | 5004 | ✅ [web-authbypass-jwt](services/web-authbypass-jwt/README.md) | Intermediate | Broken auth — JWT "alg: none" forgery |
-| 6 | 5005 | ⬜ `web-idor-tokens` | Intermediate | Harder IDOR — guessable/predictable session tokens instead of sequential IDs |
+| 6 | 5005 | ✅ [web-idor-tokens](services/web-idor-tokens/README.md) | Intermediate | Harder IDOR — share-link token is a bare hash of a public value (username), no secret |
 | 7 | 5006 | ⬜ `web-xss-stored` | Intermediate | Stored XSS — exfiltrate an admin's cookie |
 | 8 | 5007 | ⬜ `web-ssrf` | Intermediate-Advanced | Server-Side Request Forgery reaching an internal-only endpoint |
 | 9 | 5008 | ⬜ `web-path-traversal` | Intermediate | Directory/path traversal to read `/flag.txt` directly |

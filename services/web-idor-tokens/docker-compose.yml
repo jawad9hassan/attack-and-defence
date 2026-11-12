@@ -1,0 +1,11 @@
+services:
+  web-idor-tokens:
+    build:
+      context: ../..
+      dockerfile: services/web-idor-tokens/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "5005:5000"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

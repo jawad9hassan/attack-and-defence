@@ -208,3 +208,9 @@ services:
     port: 9992
     flagd_port: 10000
     checker_module: pwn_canary_bypass_checker
+
+  - name: pwn-heap
+    host: pwn-heap
+    port: 9991
+    flagd_port: 10000
+    checker_module: pwn_heap_checker

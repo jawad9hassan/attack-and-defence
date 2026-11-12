@@ -93,6 +93,60 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  web-sqli-union:
+    build:
+      context: .
+      dockerfile: services/web-sqli-union/Dockerfile
+    ports:
+      - "5002:5000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
+  web-sqli-blind:
+    build:
+      context: .
+      dockerfile: services/web-sqli-blind/Dockerfile
+    ports:
+      - "5003:5000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
+  crypto-encoding:
+    build:
+      context: .
+      dockerfile: services/crypto-encoding/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "9100:9100"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
+  re-crackme:
+    build:
+      context: .
+      dockerfile: services/re-crackme/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "9997:9997"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
+  forensics-stego:
+    build:
+      context: .
+      dockerfile: services/forensics-stego/Dockerfile
+    ports:
+      - "5004:5000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   checker:
     build:
       context: .
@@ -109,6 +163,11 @@ services:
       - crypto-xor
       - net-proto
       - pwn-format
+      - web-sqli-union
+      - web-sqli-blind
+      - crypto-encoding
+      - re-crackme
+      - forensics-stego
     restart: unless-stopped
 
 volumes:

@@ -46,3 +46,33 @@ services:
     port: 9998
     flagd_port: 10000
     checker_module: pwn_format_checker
+
+  - name: web-sqli-union
+    host: web-sqli-union
+    port: 5000
+    flagd_port: 10000
+    checker_module: web_sqli_union_checker
+
+  - name: web-sqli-blind
+    host: web-sqli-blind
+    port: 5000
+    flagd_port: 10000
+    checker_module: web_sqli_blind_checker
+
+  - name: crypto-encoding
+    host: crypto-encoding
+    port: 9100
+    flagd_port: 10000
+    checker_module: crypto_encoding_checker
+
+  - name: re-crackme
+    host: re-crackme
+    port: 9997
+    flagd_port: 10000
+    checker_module: re_crackme_checker
+
+  - name: forensics-stego
+    host: forensics-stego
+    port: 5000
+    flagd_port: 10000
+    checker_module: forensics_stego_checker

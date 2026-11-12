@@ -1,0 +1,11 @@
+services:
+  crypto-xor:
+    build:
+      context: ../..
+      dockerfile: services/crypto-xor/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "9000:9000"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

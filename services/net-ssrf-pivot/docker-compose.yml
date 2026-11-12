@@ -1,0 +1,11 @@
+services:
+  net-ssrf-pivot:
+    build:
+      context: ../..
+      dockerfile: services/net-ssrf-pivot/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "8004:6002"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

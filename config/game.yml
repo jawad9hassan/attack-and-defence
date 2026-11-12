@@ -119,6 +119,12 @@ services:
     flagd_port: 10000
     checker_module: net_rate_limit_bypass_checker
 
+  - name: net-ssrf-pivot
+    host: net-ssrf-pivot
+    port: 6002
+    flagd_port: 10000
+    checker_module: net_ssrf_pivot_checker
+
   - name: web-idor-tokens
     host: web-idor-tokens
     port: 5000

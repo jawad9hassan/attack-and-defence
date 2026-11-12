@@ -131,7 +131,7 @@ thing on the platform today — do it last of the three that exist.
 | 2 | 8001 | ✅ [net-proto](services/net-proto/README.md) | Beginner-Intermediate | Command Injection via incomplete blacklist |
 | 3 | 8002 | ✅ [net-replay](services/net-replay/README.md) | Intermediate | Replay attack — a static, leaked session token |
 | 4 | 8003 | ✅ [net-rate-limit-bypass](services/net-rate-limit-bypass/README.md) | Intermediate | Rate limiter that resets on reconnect — brute force via scripted reconnects |
-| 5 | 8004 | ⬜ `net-ssrf-pivot` | Intermediate-Advanced | Using one exposed service to reach an internal-only one |
+| 5 | 8004 | ✅ [net-ssrf-pivot](services/net-ssrf-pivot/README.md) | Intermediate-Advanced | Using one exposed service to reach an internal-only one |
 | 6 | 8005 | ⬜ `net-dns-spoof-sim` | Advanced | Simulated DNS cache poisoning exercise |
 | 7 | 8006 | ⬜ `net-tls-downgrade` | Advanced | Forcing a weak/no-encryption protocol fallback |
 | 8 | 8007 | ⬜ `net-protocol-fuzzing` | Advanced | Crash/info-leak from malformed protocol input |

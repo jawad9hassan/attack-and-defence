@@ -225,6 +225,18 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  net-ssrf-pivot:
+    build:
+      context: .
+      dockerfile: services/net-ssrf-pivot/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "8004:6002"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   web-idor-tokens:
     build:
       context: .
@@ -467,6 +479,7 @@ services:
       - forensics-pcap-basic
       - forensics-pcap-ftp
       - net-rate-limit-bypass
+      - net-ssrf-pivot
       - web-idor-tokens
       - web-xss-stored
       - web-ssrf

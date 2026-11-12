@@ -119,6 +119,12 @@ services:
     flagd_port: 10000
     checker_module: forensics_memory_dump_checker
 
+  - name: forensics-disk-image
+    host: forensics-disk-image
+    port: 5000
+    flagd_port: 10000
+    checker_module: forensics_disk_image_checker
+
   - name: net-rate-limit-bypass
     host: net-rate-limit-bypass
     port: 9600

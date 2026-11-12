@@ -89,7 +89,7 @@ authentication/API security) rather than another SQLi rung.
 | 5 | 6004 | ✅ [crypto-padding-oracle](services/crypto-padding-oracle/README.md) | Advanced | CBC padding oracle attack |
 | 6 | 6005 | ✅ [crypto-weak-hash](services/crypto-weak-hash/README.md) | Beginner-Intermediate | Cracking an unsalted, fast-hashed password via wordlist |
 | 7 | 6006 | ✅ [crypto-jwt-secret](services/crypto-jwt-secret/README.md) | Intermediate | Brute-forcing a weak HMAC secret (distinct from `web-authbypass-jwt`'s `alg:none` bug) |
-| 8 | 6007 | ⬜ `crypto-nonce-reuse` | Advanced | AES-GCM nonce reuse breaking authenticity/confidentiality |
+| 8 | 6007 | ✅ [crypto-nonce-reuse](services/crypto-nonce-reuse/README.md) | Advanced | Stream-cipher nonce reuse breaking confidentiality |
 | 9 | 6008 | ⬜ `crypto-rsa-small-e` | Advanced | Low public exponent + no padding — cube-root recovery |
 | 10 | 6009 | ⬜ `crypto-timing` | Advanced | Timing side-channel on a naive string comparison |
 

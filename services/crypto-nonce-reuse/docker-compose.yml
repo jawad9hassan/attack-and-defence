@@ -1,0 +1,11 @@
+services:
+  crypto-nonce-reuse:
+    build:
+      context: ../..
+      dockerfile: services/crypto-nonce-reuse/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "6007:9900"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

@@ -179,6 +179,8 @@ attack-and-defence/
   wordlist (Crypto ladder, rung 6)
 - ✅ `crypto-jwt-secret` — brute-forcing a weak JWT HMAC secret (Crypto
   ladder, rung 7)
+- ✅ `crypto-nonce-reuse` — stream-cipher nonce reuse breaking
+  confidentiality (Crypto ladder, rung 8)
 - ⬜ Every category is building toward 10 rungs — see `main.md` for the
   full named, ported backlog (⬜ rows) for Web, Crypto, Binary/RE,
   Network, and Forensics

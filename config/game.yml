@@ -172,3 +172,9 @@ services:
     port: 5000
     flagd_port: 10000
     checker_module: crypto_jwt_secret_checker
+
+  - name: crypto-nonce-reuse
+    host: crypto-nonce-reuse
+    port: 9900
+    flagd_port: 10000
+    checker_module: crypto_nonce_reuse_checker

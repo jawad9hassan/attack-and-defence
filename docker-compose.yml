@@ -331,6 +331,18 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  crypto-nonce-reuse:
+    build:
+      context: .
+      dockerfile: services/crypto-nonce-reuse/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "6007:9900"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   checker:
     build:
       context: .
@@ -368,6 +380,7 @@ services:
       - crypto-padding-oracle
       - crypto-weak-hash
       - crypto-jwt-secret
+      - crypto-nonce-reuse
     restart: unless-stopped
 
 volumes:

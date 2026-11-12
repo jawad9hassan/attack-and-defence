@@ -131,6 +131,12 @@ services:
     flagd_port: 10000
     checker_module: forensics_log_analysis_checker
 
+  - name: forensics-metadata
+    host: forensics-metadata
+    port: 5000
+    flagd_port: 10000
+    checker_module: forensics_metadata_checker
+
   - name: net-rate-limit-bypass
     host: net-rate-limit-bypass
     port: 9600

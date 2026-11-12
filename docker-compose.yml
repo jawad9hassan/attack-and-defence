@@ -243,6 +243,16 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  forensics-metadata:
+    build:
+      context: .
+      dockerfile: services/forensics-metadata/Dockerfile
+    ports:
+      - "9006:5000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   net-rate-limit-bypass:
     build:
       context: .
@@ -569,6 +579,7 @@ services:
       - forensics-memory-dump
       - forensics-disk-image
       - forensics-log-analysis
+      - forensics-metadata
       - net-rate-limit-bypass
       - net-ssrf-pivot
       - net-dns-spoof-sim

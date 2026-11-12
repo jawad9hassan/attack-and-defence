@@ -1,0 +1,11 @@
+services:
+  net-replay:
+    build:
+      context: ../..
+      dockerfile: services/net-replay/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "8002:9500"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

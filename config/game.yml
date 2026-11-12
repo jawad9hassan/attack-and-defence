@@ -112,3 +112,9 @@ services:
     port: 5000
     flagd_port: 10000
     checker_module: forensics_pcap_ftp_checker
+
+  - name: net-rate-limit-bypass
+    host: net-rate-limit-bypass
+    port: 9600
+    flagd_port: 10000
+    checker_module: net_rate_limit_bypass_checker

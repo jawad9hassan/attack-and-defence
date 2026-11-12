@@ -213,6 +213,18 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  net-rate-limit-bypass:
+    build:
+      context: .
+      dockerfile: services/net-rate-limit-bypass/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "8003:9600"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   checker:
     build:
       context: .
@@ -240,6 +252,7 @@ services:
       - net-replay
       - forensics-pcap-basic
       - forensics-pcap-ftp
+      - net-rate-limit-bypass
     restart: unless-stopped
 
 volumes:

@@ -126,7 +126,7 @@ thing on the platform today — do it last of the three that exist.
 | 1 | 8000 | ✅ [net-auth](services/net-auth/README.md) | Beginner | Default/weak credentials left enabled |
 | 2 | 8001 | ✅ [net-proto](services/net-proto/README.md) | Beginner-Intermediate | Command Injection via incomplete blacklist |
 | 3 | 8002 | ✅ [net-replay](services/net-replay/README.md) | Intermediate | Replay attack — a static, leaked session token |
-| 4 | 8003 | ⬜ `net-rate-limit-bypass` | Intermediate | Abusing a flawed, IP-based rate limiter |
+| 4 | 8003 | ✅ [net-rate-limit-bypass](services/net-rate-limit-bypass/README.md) | Intermediate | Rate limiter that resets on reconnect — brute force via scripted reconnects |
 | 5 | 8004 | ⬜ `net-ssrf-pivot` | Intermediate-Advanced | Using one exposed service to reach an internal-only one |
 | 6 | 8005 | ⬜ `net-dns-spoof-sim` | Advanced | Simulated DNS cache poisoning exercise |
 | 7 | 8006 | ⬜ `net-tls-downgrade` | Advanced | Forcing a weak/no-encryption protocol fallback |
@@ -137,7 +137,9 @@ thing on the platform today — do it last of the three that exist.
 **Ladder:** `net-auth` is the simplest possible finding — a password
 nobody disabled. `net-proto` needs understanding shell metacharacters.
 `net-replay` requires noticing and reusing a leaked credential across
-sessions — the most "investigative" of the three.
+sessions. `net-rate-limit-bypass` is the first challenge here that
+needs you to actually write and run a script, not just send one clever
+input.
 
 ## 🔍 Digital Forensics (`9000`–`9999`)
 

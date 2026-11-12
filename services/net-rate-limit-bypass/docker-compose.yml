@@ -1,0 +1,11 @@
+services:
+  net-rate-limit-bypass:
+    build:
+      context: ../..
+      dockerfile: services/net-rate-limit-bypass/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "8003:9600"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

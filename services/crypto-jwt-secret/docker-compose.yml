@@ -1,0 +1,11 @@
+services:
+  crypto-jwt-secret:
+    build:
+      context: ../..
+      dockerfile: services/crypto-jwt-secret/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "6006:5000"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

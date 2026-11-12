@@ -166,3 +166,9 @@ services:
     port: 5000
     flagd_port: 10000
     checker_module: crypto_weak_hash_checker
+
+  - name: crypto-jwt-secret
+    host: crypto-jwt-secret
+    port: 5000
+    flagd_port: 10000
+    checker_module: crypto_jwt_secret_checker

@@ -1,0 +1,11 @@
+services:
+  net-arp-spoof-sim:
+    build:
+      context: ../..
+      dockerfile: services/net-arp-spoof-sim/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "8008:6006"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

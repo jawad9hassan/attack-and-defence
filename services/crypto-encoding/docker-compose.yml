@@ -1,0 +1,11 @@
+services:
+  crypto-encoding:
+    build:
+      context: ../..
+      dockerfile: services/crypto-encoding/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "9100:9100"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

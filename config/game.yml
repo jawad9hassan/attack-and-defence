@@ -196,3 +196,9 @@ services:
     port: 9996
     flagd_port: 10000
     checker_module: re_anti_debug_checker
+
+  - name: re-packed
+    host: re-packed
+    port: 9994
+    flagd_port: 10000
+    checker_module: re_packed_checker

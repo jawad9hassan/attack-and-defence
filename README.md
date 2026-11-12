@@ -188,6 +188,8 @@ attack-and-defence/
   10/10**)
 - ✅ `re-anti-debug` — bypassing a ptrace-based anti-debugging check
   (Binary/RE ladder, rung 4)
+- ✅ `re-packed` — unpacking a self-extracting packed binary before
+  analyzing it (Binary/RE ladder, rung 5)
 - ⬜ Every category is building toward 10 rungs — see `main.md` for the
   full named, ported backlog (⬜ rows) for Web, Crypto, Binary/RE,
   Network, and Forensics

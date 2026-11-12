@@ -1,0 +1,11 @@
+services:
+  re-packed:
+    build:
+      context: ../..
+      dockerfile: services/re-packed/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "7004:9994"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

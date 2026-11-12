@@ -379,6 +379,18 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  re-packed:
+    build:
+      context: .
+      dockerfile: services/re-packed/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "7004:9994"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   checker:
     build:
       context: .
@@ -420,6 +432,7 @@ services:
       - crypto-rsa-small-e
       - crypto-timing
       - re-anti-debug
+      - re-packed
     restart: unless-stopped
 
 volumes:

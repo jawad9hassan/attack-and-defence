@@ -171,6 +171,8 @@ attack-and-defence/
 - ✅ `web-api-mass-assignment` — API mass assignment, forging a
   `"role":"admin"` field on signup (Web ladder, rung 10 — **Web &
   Application Security category now complete, 10/10**)
+- ✅ `crypto-ecb-oracle` — byte-at-a-time ECB decryption (Crypto
+  ladder, rung 4)
 - ⬜ Every category is building toward 10 rungs — see `main.md` for the
   full named, ported backlog (⬜ rows) for Web, Crypto, Binary/RE,
   Network, and Forensics

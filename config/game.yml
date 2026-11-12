@@ -148,3 +148,9 @@ services:
     port: 5000
     flagd_port: 10000
     checker_module: web_api_mass_assignment_checker
+
+  - name: crypto-ecb-oracle
+    host: crypto-ecb-oracle
+    port: 9700
+    flagd_port: 10000
+    checker_module: crypto_ecb_oracle_checker

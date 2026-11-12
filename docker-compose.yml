@@ -283,6 +283,18 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  crypto-ecb-oracle:
+    build:
+      context: .
+      dockerfile: services/crypto-ecb-oracle/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "6003:9700"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   checker:
     build:
       context: .
@@ -316,6 +328,7 @@ services:
       - web-ssrf
       - web-path-traversal
       - web-api-mass-assignment
+      - crypto-ecb-oracle
     restart: unless-stopped
 
 volumes:

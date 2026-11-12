@@ -1,0 +1,11 @@
+services:
+  crypto-ecb-oracle:
+    build:
+      context: ../..
+      dockerfile: services/crypto-ecb-oracle/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "6003:9700"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

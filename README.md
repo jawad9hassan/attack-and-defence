@@ -175,6 +175,8 @@ attack-and-defence/
   ladder, rung 4)
 - ✅ `crypto-padding-oracle` — CBC padding oracle attack (Crypto
   ladder, rung 5)
+- ✅ `crypto-weak-hash` — cracking an unsalted SHA-256 password hash via
+  wordlist (Crypto ladder, rung 6)
 - ⬜ Every category is building toward 10 rungs — see `main.md` for the
   full named, ported backlog (⬜ rows) for Web, Crypto, Binary/RE,
   Network, and Forensics

@@ -307,6 +307,18 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  crypto-weak-hash:
+    build:
+      context: .
+      dockerfile: services/crypto-weak-hash/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "6005:5000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   checker:
     build:
       context: .
@@ -342,6 +354,7 @@ services:
       - web-api-mass-assignment
       - crypto-ecb-oracle
       - crypto-padding-oracle
+      - crypto-weak-hash
     restart: unless-stopped
 
 volumes:

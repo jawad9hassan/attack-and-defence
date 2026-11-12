@@ -160,3 +160,9 @@ services:
     port: 9800
     flagd_port: 10000
     checker_module: crypto_padding_oracle_checker
+
+  - name: crypto-weak-hash
+    host: crypto-weak-hash
+    port: 5000
+    flagd_port: 10000
+    checker_module: crypto_weak_hash_checker

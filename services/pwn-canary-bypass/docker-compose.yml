@@ -1,0 +1,11 @@
+services:
+  pwn-canary-bypass:
+    build:
+      context: ../..
+      dockerfile: services/pwn-canary-bypass/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "7005:9992"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

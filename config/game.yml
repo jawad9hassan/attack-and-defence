@@ -202,3 +202,9 @@ services:
     port: 9994
     flagd_port: 10000
     checker_module: re_packed_checker
+
+  - name: pwn-canary-bypass
+    host: pwn-canary-bypass
+    port: 9992
+    flagd_port: 10000
+    checker_module: pwn_canary_bypass_checker

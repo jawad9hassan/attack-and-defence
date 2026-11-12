@@ -112,7 +112,7 @@ explains why.
 | 3 | 7002 | ✅ [pwn-format](services/pwn-format/README.md) | Intermediate-Advanced | Format string — arbitrary memory write |
 | 4 | 7003 | ✅ [re-anti-debug](services/re-anti-debug/README.md) | Intermediate | Bypassing a ptrace-based anti-debugging check |
 | 5 | 7004 | ✅ [re-packed](services/re-packed/README.md) | Intermediate | Unpacking a packed binary before analyzing it |
-| 6 | 7005 | ⬜ `pwn-canary-bypass` | Advanced | Leaking and bypassing a stack canary |
+| 6 | 7005 | ✅ [pwn-canary-bypass](services/pwn-canary-bypass/README.md) | Advanced | Leaking and bypassing a stack canary |
 | 7 | 7006 | ⬜ `pwn-heap` | Advanced | Basic heap overflow / use-after-free |
 | 8 | 7007 | ⬜ `pwn-ret2libc` | Advanced | Return-to-libc with ASLR/PIE enabled |
 | 9 | 7008 | ⬜ `pwn-rop-chain` | Advanced | Full ROP chain construction, no gift `win()` function |

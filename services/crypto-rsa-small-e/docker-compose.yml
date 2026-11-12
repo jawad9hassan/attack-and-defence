@@ -1,0 +1,11 @@
+services:
+  crypto-rsa-small-e:
+    build:
+      context: ../..
+      dockerfile: services/crypto-rsa-small-e/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "6008:9990"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

@@ -343,6 +343,18 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  crypto-rsa-small-e:
+    build:
+      context: .
+      dockerfile: services/crypto-rsa-small-e/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "6008:9990"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   checker:
     build:
       context: .
@@ -381,6 +393,7 @@ services:
       - crypto-weak-hash
       - crypto-jwt-secret
       - crypto-nonce-reuse
+      - crypto-rsa-small-e
     restart: unless-stopped
 
 volumes:

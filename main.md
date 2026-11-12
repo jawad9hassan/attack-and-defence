@@ -90,7 +90,7 @@ authentication/API security) rather than another SQLi rung.
 | 6 | 6005 | ✅ [crypto-weak-hash](services/crypto-weak-hash/README.md) | Beginner-Intermediate | Cracking an unsalted, fast-hashed password via wordlist |
 | 7 | 6006 | ✅ [crypto-jwt-secret](services/crypto-jwt-secret/README.md) | Intermediate | Brute-forcing a weak HMAC secret (distinct from `web-authbypass-jwt`'s `alg:none` bug) |
 | 8 | 6007 | ✅ [crypto-nonce-reuse](services/crypto-nonce-reuse/README.md) | Advanced | Stream-cipher nonce reuse breaking confidentiality |
-| 9 | 6008 | ⬜ `crypto-rsa-small-e` | Advanced | Low public exponent + no padding — cube-root recovery |
+| 9 | 6008 | ✅ [crypto-rsa-small-e](services/crypto-rsa-small-e/README.md) | Advanced | Low public exponent + no padding — cube-root recovery |
 | 10 | 6009 | ⬜ `crypto-timing` | Advanced | Timing side-channel on a naive string comparison |
 
 **Ladder:** `crypto-encoding` has no key and nothing to break — it's

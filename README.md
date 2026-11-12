@@ -181,6 +181,8 @@ attack-and-defence/
   ladder, rung 7)
 - ✅ `crypto-nonce-reuse` — stream-cipher nonce reuse breaking
   confidentiality (Crypto ladder, rung 8)
+- ✅ `crypto-rsa-small-e` — low public exponent (e=3), no padding,
+  integer cube-root recovery (Crypto ladder, rung 9)
 - ⬜ Every category is building toward 10 rungs — see `main.md` for the
   full named, ported backlog (⬜ rows) for Web, Crypto, Binary/RE,
   Network, and Forensics

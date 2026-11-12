@@ -1,0 +1,11 @@
+services:
+  net-proto:
+    build:
+      context: ../..
+      dockerfile: services/net-proto/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "9200:9200"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

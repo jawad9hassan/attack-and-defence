@@ -1,0 +1,9 @@
+services:
+  web-authbypass-jwt:
+    build:
+      context: ../..
+      dockerfile: services/web-authbypass-jwt/Dockerfile
+    ports:
+      - "5004:5000"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

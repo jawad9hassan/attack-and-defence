@@ -1,0 +1,9 @@
+services:
+  forensics-pcap-basic:
+    build:
+      context: ../..
+      dockerfile: services/forensics-pcap-basic/Dockerfile
+    ports:
+      - "9000:5000"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

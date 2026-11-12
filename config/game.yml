@@ -149,6 +149,12 @@ services:
     flagd_port: 10000
     checker_module: net_arp_spoof_sim_checker
 
+  - name: net-c2-beacon-analysis
+    host: net-c2-beacon-analysis
+    port: 5000
+    flagd_port: 10000
+    checker_module: net_c2_beacon_analysis_checker
+
   - name: web-idor-tokens
     host: web-idor-tokens
     port: 5000

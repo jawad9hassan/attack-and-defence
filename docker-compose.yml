@@ -285,6 +285,16 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  net-c2-beacon-analysis:
+    build:
+      context: .
+      dockerfile: services/net-c2-beacon-analysis/Dockerfile
+    ports:
+      - "8009:5000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   web-idor-tokens:
     build:
       context: .
@@ -532,6 +542,7 @@ services:
       - net-tls-downgrade
       - net-protocol-fuzzing
       - net-arp-spoof-sim
+      - net-c2-beacon-analysis
       - web-idor-tokens
       - web-xss-stored
       - web-ssrf

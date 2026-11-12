@@ -1,0 +1,9 @@
+services:
+  net-c2-beacon-analysis:
+    build:
+      context: ../..
+      dockerfile: services/net-c2-beacon-analysis/Dockerfile
+    ports:
+      - "8009:5000"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

@@ -213,6 +213,16 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  forensics-memory-dump:
+    build:
+      context: .
+      dockerfile: services/forensics-memory-dump/Dockerfile
+    ports:
+      - "9003:5000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   net-rate-limit-bypass:
     build:
       context: .
@@ -536,6 +546,7 @@ services:
       - net-replay
       - forensics-pcap-basic
       - forensics-pcap-ftp
+      - forensics-memory-dump
       - net-rate-limit-bypass
       - net-ssrf-pivot
       - net-dns-spoof-sim

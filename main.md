@@ -154,7 +154,7 @@ input.
 | 1 | 9000 | ✅ [forensics-pcap-basic](services/forensics-pcap-basic/README.md) | Beginner | Plaintext capture — open it and read it |
 | 2 | 9001 | ✅ [forensics-stego](services/forensics-stego/README.md) | Beginner-Intermediate | LSB steganography — hidden data in image pixels |
 | 3 | 9002 | ✅ [forensics-pcap-ftp](services/forensics-pcap-ftp/README.md) | Intermediate | Multi-stream capture — following the *right* TCP stream |
-| 4 | 9003 | ⬜ `forensics-memory-dump` | Intermediate | Basic memory forensics (string/process extraction from a memory image) |
+| 4 | 9003 | ✅ [forensics-memory-dump](services/forensics-memory-dump/README.md) | Intermediate | Basic memory forensics (string/process extraction from a memory image) |
 | 5 | 9004 | ⬜ `forensics-disk-image` | Intermediate-Advanced | Autopsy-style disk image analysis, deleted file recovery |
 | 6 | 9005 | ⬜ `forensics-log-analysis` | Intermediate | Finding an intrusion by sifting through log files |
 | 7 | 9006 | ⬜ `forensics-metadata` | Beginner-Intermediate | Flag leaked in a file's EXIF/document metadata |

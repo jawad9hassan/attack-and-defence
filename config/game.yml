@@ -113,6 +113,12 @@ services:
     flagd_port: 10000
     checker_module: forensics_pcap_ftp_checker
 
+  - name: forensics-memory-dump
+    host: forensics-memory-dump
+    port: 5000
+    flagd_port: 10000
+    checker_module: forensics_memory_dump_checker
+
   - name: net-rate-limit-bypass
     host: net-rate-limit-bypass
     port: 9600

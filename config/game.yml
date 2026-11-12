@@ -125,6 +125,12 @@ services:
     flagd_port: 10000
     checker_module: forensics_disk_image_checker
 
+  - name: forensics-log-analysis
+    host: forensics-log-analysis
+    port: 5000
+    flagd_port: 10000
+    checker_module: forensics_log_analysis_checker
+
   - name: net-rate-limit-bypass
     host: net-rate-limit-bypass
     port: 9600

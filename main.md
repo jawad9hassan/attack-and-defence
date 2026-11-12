@@ -156,7 +156,7 @@ input.
 | 3 | 9002 | ✅ [forensics-pcap-ftp](services/forensics-pcap-ftp/README.md) | Intermediate | Multi-stream capture — following the *right* TCP stream |
 | 4 | 9003 | ✅ [forensics-memory-dump](services/forensics-memory-dump/README.md) | Intermediate | Basic memory forensics (string/process extraction from a memory image) |
 | 5 | 9004 | ✅ [forensics-disk-image](services/forensics-disk-image/README.md) | Intermediate-Advanced | Autopsy-style disk image analysis, deleted file recovery |
-| 6 | 9005 | ⬜ `forensics-log-analysis` | Intermediate | Finding an intrusion by sifting through log files |
+| 6 | 9005 | ✅ [forensics-log-analysis](services/forensics-log-analysis/README.md) | Intermediate | Finding an intrusion by sifting through log files |
 | 7 | 9006 | ⬜ `forensics-metadata` | Beginner-Intermediate | Flag leaked in a file's EXIF/document metadata |
 | 8 | 9007 | ⬜ `forensics-timeline` | Advanced | Reconstructing an attack timeline from multiple log sources |
 | 9 | 9008 | ⬜ `forensics-malware-triage` | Advanced | Static analysis of a "malicious" sample (blue-team flavored) |

@@ -1,0 +1,9 @@
+services:
+  forensics-log-analysis:
+    build:
+      context: ../..
+      dockerfile: services/forensics-log-analysis/Dockerfile
+    ports:
+      - "9005:5000"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

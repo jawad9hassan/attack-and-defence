@@ -11,23 +11,13 @@ hex-encoded, block-sized ciphertext back for a benign query.
 import socket
 
 
-def _read_line(sock, timeout=5):
-    sock.settimeout(timeout)
-    data = b""
-    while not data.endswith(b"\n"):
-        chunk = sock.recv(4096)
-        if not chunk:
-            break
-        data += chunk
-    return data.strip()
-
-
 def sla_check(host, port):
     try:
         with socket.create_connection((host, port), timeout=5) as s:
-            _read_line(s)  # banner
+            f = s.makefile("rb")
+            f.readline()  # banner
             s.sendall(b"\n")
-            reply = _read_line(s)
+            reply = f.readline().strip()
     except OSError as e:
         return False, f"connection failed: {e}"
 

@@ -154,3 +154,9 @@ services:
     port: 9700
     flagd_port: 10000
     checker_module: crypto_ecb_oracle_checker
+
+  - name: crypto-padding-oracle
+    host: crypto-padding-oracle
+    port: 9800
+    flagd_port: 10000
+    checker_module: crypto_padding_oracle_checker

@@ -295,6 +295,18 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  crypto-padding-oracle:
+    build:
+      context: .
+      dockerfile: services/crypto-padding-oracle/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "6004:9800"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   checker:
     build:
       context: .
@@ -329,6 +341,7 @@ services:
       - web-path-traversal
       - web-api-mass-assignment
       - crypto-ecb-oracle
+      - crypto-padding-oracle
     restart: unless-stopped
 
 volumes:

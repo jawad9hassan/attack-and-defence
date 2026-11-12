@@ -86,7 +86,7 @@ authentication/API security) rather than another SQLi rung.
 | 2 | 6001 | ✅ [crypto-xor](services/crypto-xor/README.md) | Beginner-Intermediate | Breaking real crypto — XOR key reuse, chosen-plaintext attack |
 | 3 | 6002 | ✅ [crypto-weak-rsa](services/crypto-weak-rsa/README.md) | Intermediate-Advanced | RSA shared-prime key recovery via `gcd` |
 | 4 | 6003 | ✅ [crypto-ecb-oracle](services/crypto-ecb-oracle/README.md) | Intermediate | ECB mode pattern leakage — byte-at-a-time secret recovery |
-| 5 | 6004 | ⬜ `crypto-padding-oracle` | Advanced | CBC padding oracle attack |
+| 5 | 6004 | ✅ [crypto-padding-oracle](services/crypto-padding-oracle/README.md) | Advanced | CBC padding oracle attack |
 | 6 | 6005 | ⬜ `crypto-weak-hash` | Beginner-Intermediate | Cracking an unsalted, fast-hashed password via wordlist |
 | 7 | 6006 | ⬜ `crypto-jwt-secret` | Intermediate | Brute-forcing a weak HMAC secret (distinct from `web-authbypass-jwt`'s `alg:none` bug) |
 | 8 | 6007 | ⬜ `crypto-nonce-reuse` | Advanced | AES-GCM nonce reuse breaking authenticity/confidentiality |

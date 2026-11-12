@@ -1,0 +1,11 @@
+services:
+  crypto-padding-oracle:
+    build:
+      context: ../..
+      dockerfile: services/crypto-padding-oracle/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "6004:9800"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

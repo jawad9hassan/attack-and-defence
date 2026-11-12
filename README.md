@@ -3,15 +3,20 @@
 A small, scalable attack-defense CTF simulation, built for a five-person
 team training for a real A/D competition. One command brings up:
 
-- **Vulnerable services** you attack and defend (currently six, covering
-  web, binary, crypto, and network-protocol bug classes, designed to keep
-  scaling — see `docs/ADDING_A_SERVICE.md`)
+- **Vulnerable services** you attack and defend (currently eleven,
+  covering web, binary, crypto, network-protocol, and digital-forensics
+  bug classes — several as difficulty ladders within one category —
+  designed to keep scaling: see `docs/ADDING_A_SERVICE.md`)
 - **A checker** that runs real, round-based game operations: it verifies
   each service's normal functionality, rotates its flag every round, and
   expires old flags — the same mechanics a real attack-defense gameserver
   uses
 - **A live scoreboard** (auto-refreshing) with defense (uptime) scores and
   an attacker leaderboard
+
+**👉 [`main.md`](main.md) is the challenge index** — every challenge,
+grouped by category, ordered easiest → hardest, with its port/command
+and a link to its own walkthrough. Start there once the platform is up.
 
 Read `docs/ARCHITECTURE.md` for how the pieces fit together, and the
 commit history (`git log`) for how — and why — each piece was built, in
@@ -27,34 +32,29 @@ docker compose up --build
 Then:
 
 - **Scoreboard:** `http://localhost:8080`
-- **web-notes** (service 1): `http://localhost:5000`
-- **pwn-baby** (service 2): `nc localhost 9999`
-- **web-idor** (service 3): `http://localhost:5001`
-- **crypto-xor** (service 4): `nc localhost 9000`
-- **net-proto** (service 5): `nc localhost 9200`
-- **pwn-format** (service 6): `nc localhost 9998`
+- **Challenge index (start here):** [`main.md`](main.md) — every
+  service's port/command, grouped by category, easiest → hardest
 
-Each service's own `README.md` explains its vulnerability class and gives
-you a path to discover the exploit yourself, without handing you the exact
-payload.
+Each service's own `README.md` (linked from `main.md`) explains its
+vulnerability class and gives you a path to discover the exploit
+yourself, without handing you the exact payload.
 
 ## Services
 
-| Folder | Category | Difficulty | What you're doing |
-|---|---|---|---|
-| `services/web-notes` | Web / SQL Injection | Beginner | Bypass a login form's SQL query |
-| `services/pwn-baby`  | Binary / Stack Overflow | Intermediate | Hijack control flow with a ret2win |
-| `services/web-idor`  | Web / Broken Access Control (IDOR) | Beginner | Read another user's data by changing an ID |
-| `services/crypto-xor` | Crypto / Key Reuse | Beginner-Intermediate | Break a reused XOR key with a chosen-plaintext attack |
-| `services/net-proto`  | Network / Command Injection | Beginner-Intermediate | Bypass an incomplete blacklist to inject shell commands |
-| `services/pwn-format`  | Binary / Format String | Intermediate-Advanced | Arbitrary memory write via `printf()`'s own directives |
+**See [`main.md`](main.md) for the full, up-to-date challenge index** —
+all eleven services, grouped by category, ordered easiest → hardest,
+each with a direct link to its own walkthrough. That file is the single
+source of truth for "what challenges exist and in what order"; this
+README won't duplicate the table and risk it going stale.
 
-More than one service of the same general category exists on purpose
-(e.g. two web bugs, two binary bugs) — a real competition rarely has
-just one of anything, and the plan is to keep adding more of each kind
-over time, not stop at one. See the changelog below for what's next,
-and `docs/ADDING_A_SERVICE.md` for how straightforward adding another
-one is meant to be.
+More than one service per category is intentional, organized as
+**difficulty ladders** (e.g. three SQLi challenges of increasing
+difficulty, three binary-exploitation challenges) rather than one-off
+duplicates — a real competition rarely has just one of anything, and
+the plan is to keep adding rungs and whole new categories over time.
+See `main.md`'s "What's next" section for what's planned, and
+`docs/ADDING_A_SERVICE.md` for how straightforward adding another one
+is meant to be.
 
 ## How a training session works
 
@@ -80,15 +80,21 @@ roles, what to do afterward) is in `docs/RULES.md`.
 
 ```
 attack-and-defence/
+├── main.md                   ← START HERE: challenge index, easiest → hardest
 ├── docker-compose.yml        ← brings up everything together
 ├── config/game.yml           ← round timing, flag lifetime, service registry
 ├── services/
-│   ├── web-notes/             (SQL Injection)
-│   ├── pwn-baby/               (Stack Overflow / ret2win)
+│   ├── web-notes/             (SQL Injection, ladder rung 1/3)
+│   ├── web-sqli-union/        (SQL Injection, ladder rung 2/3)
+│   ├── web-sqli-blind/        (SQL Injection, ladder rung 3/3)
 │   ├── web-idor/               (Broken Access Control / IDOR)
-│   ├── crypto-xor/             (XOR key-reuse / chosen-plaintext)
+│   ├── re-crackme/             (Reverse Engineering, ladder rung 1/3)
+│   ├── pwn-baby/               (Stack Overflow / ret2win, ladder rung 2/3)
+│   ├── pwn-format/             (Format String, ladder rung 3/3)
+│   ├── crypto-encoding/        (Layered encoding, ladder rung 1/2)
+│   ├── crypto-xor/             (XOR key-reuse / chosen-plaintext, ladder rung 2/2)
 │   ├── net-proto/              (Command Injection)
-│   ├── pwn-format/             (Format String)
+│   ├── forensics-stego/        (LSB Steganography)
 │   └── _template/              (copy this to add a new service)
 ├── platform/
 │   ├── common/flagd.py         (shared flag-rotation sidecar)
@@ -112,9 +118,17 @@ attack-and-defence/
 - ✅ `crypto-xor` — XOR key-reuse / chosen-plaintext crypto service
 - ✅ `net-proto` — Command Injection (incomplete blacklist) service
 - ✅ `pwn-format` — Format String (arbitrary write) service
-- ⬜ A second web service with a logic-based auth bypass (not SQLi, not IDOR)
-- ⬜ A heap-based binary exploitation service (use-after-free / heap overflow)
-- ⬜ A second, harder crypto service (e.g. weak RSA parameters)
+- ✅ `web-sqli-union` — UNION-based SQLi (SQLi ladder, rung 2 of 3)
+- ✅ `web-sqli-blind` — Blind boolean-based SQLi (SQLi ladder, rung 3 of 3)
+- ✅ `crypto-encoding` — layered encoding puzzle (crypto ladder, rung 1 of 2)
+- ✅ `re-crackme` — intro reverse engineering (binary ladder, rung 1 of 3)
+- ✅ `forensics-stego` — LSB steganography (new category: digital forensics)
+- ✅ `main.md` — challenge index, grouped by category, easiest → hardest
+- ⬜ A second Broken Access Control challenge (harder than `web-idor`)
+- ⬜ A second Command Injection / network-protocol challenge
+- ⬜ A PCAP/network-traffic-analysis challenge (digital forensics ladder)
+- ⬜ A heap-based binary exploitation challenge (binary ladder, rung 4)
+- ⬜ A harder crypto challenge, e.g. weak RSA parameters (crypto ladder, rung 3)
 - ⬜ Real multi-team isolation (see `docs/ARCHITECTURE.md`'s scaling section)
 
 This list keeps growing — the architecture (checker module contract +

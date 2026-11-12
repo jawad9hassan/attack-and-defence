@@ -1,0 +1,11 @@
+services:
+  re-crackme:
+    build:
+      context: ../..
+      dockerfile: services/re-crackme/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "9997:9997"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

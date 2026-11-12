@@ -1,0 +1,11 @@
+services:
+  net-dns-spoof-sim:
+    build:
+      context: ../..
+      dockerfile: services/net-dns-spoof-sim/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "8005:6003"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

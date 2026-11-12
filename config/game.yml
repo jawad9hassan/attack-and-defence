@@ -125,6 +125,12 @@ services:
     flagd_port: 10000
     checker_module: net_ssrf_pivot_checker
 
+  - name: net-dns-spoof-sim
+    host: net-dns-spoof-sim
+    port: 6003
+    flagd_port: 10000
+    checker_module: net_dns_spoof_sim_checker
+
   - name: web-idor-tokens
     host: web-idor-tokens
     port: 5000

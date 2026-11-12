@@ -237,6 +237,18 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  net-dns-spoof-sim:
+    build:
+      context: .
+      dockerfile: services/net-dns-spoof-sim/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "8005:6003"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   web-idor-tokens:
     build:
       context: .
@@ -480,6 +492,7 @@ services:
       - forensics-pcap-ftp
       - net-rate-limit-bypass
       - net-ssrf-pivot
+      - net-dns-spoof-sim
       - web-idor-tokens
       - web-xss-stored
       - web-ssrf

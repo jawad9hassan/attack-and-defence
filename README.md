@@ -30,6 +30,18 @@ cp .env.example .env    # optional — defaults work fine for local practice
 docker compose up --build
 ```
 
+After the first setup, the team can pull new challenges and restart
+with one command instead of the `git pull` + `docker compose down` +
+`docker compose up --build` sequence by hand:
+
+```bash
+./setup.sh              # pull latest, stop old containers, rebuild, run
+./setup.sh --detached    # same, but keep running in the background
+./setup.sh --reset       # also wipes the scoreboard's saved data —
+                         # use this right before the real competition
+                         # run, not during practice
+```
+
 Then:
 
 - **Scoreboard:** `http://localhost:8080`

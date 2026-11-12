@@ -131,6 +131,12 @@ services:
     flagd_port: 10000
     checker_module: net_dns_spoof_sim_checker
 
+  - name: net-tls-downgrade
+    host: net-tls-downgrade
+    port: 6004
+    flagd_port: 10000
+    checker_module: net_tls_downgrade_checker
+
   - name: web-idor-tokens
     host: web-idor-tokens
     port: 5000

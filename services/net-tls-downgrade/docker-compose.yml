@@ -1,0 +1,11 @@
+services:
+  net-tls-downgrade:
+    build:
+      context: ../..
+      dockerfile: services/net-tls-downgrade/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "8006:6004"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

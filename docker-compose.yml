@@ -249,6 +249,18 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  net-tls-downgrade:
+    build:
+      context: .
+      dockerfile: services/net-tls-downgrade/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "8006:6004"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   web-idor-tokens:
     build:
       context: .
@@ -493,6 +505,7 @@ services:
       - net-rate-limit-bypass
       - net-ssrf-pivot
       - net-dns-spoof-sim
+      - net-tls-downgrade
       - web-idor-tokens
       - web-xss-stored
       - web-ssrf

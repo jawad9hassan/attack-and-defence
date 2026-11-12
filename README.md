@@ -3,8 +3,9 @@
 A small, scalable attack-defense CTF simulation, built for a five-person
 team training for a real A/D competition. One command brings up:
 
-- **Vulnerable services** you attack and defend (currently two, designed
-  to scale — see `docs/ADDING_A_SERVICE.md`)
+- **Vulnerable services** you attack and defend (currently six, covering
+  web, binary, crypto, and network-protocol bug classes, designed to keep
+  scaling — see `docs/ADDING_A_SERVICE.md`)
 - **A checker** that runs real, round-based game operations: it verifies
   each service's normal functionality, rotates its flag every round, and
   expires old flags — the same mechanics a real attack-defense gameserver
@@ -28,6 +29,10 @@ Then:
 - **Scoreboard:** `http://localhost:8080`
 - **web-notes** (service 1): `http://localhost:5000`
 - **pwn-baby** (service 2): `nc localhost 9999`
+- **web-idor** (service 3): `http://localhost:5001`
+- **crypto-xor** (service 4): `nc localhost 9000`
+- **net-proto** (service 5): `nc localhost 9200`
+- **pwn-format** (service 6): `nc localhost 9998`
 
 Each service's own `README.md` explains its vulnerability class and gives
 you a path to discover the exploit yourself, without handing you the exact
@@ -39,9 +44,17 @@ payload.
 |---|---|---|---|
 | `services/web-notes` | Web / SQL Injection | Beginner | Bypass a login form's SQL query |
 | `services/pwn-baby`  | Binary / Stack Overflow | Intermediate | Hijack control flow with a ret2win |
+| `services/web-idor`  | Web / Broken Access Control (IDOR) | Beginner | Read another user's data by changing an ID |
+| `services/crypto-xor` | Crypto / Key Reuse | Beginner-Intermediate | Break a reused XOR key with a chosen-plaintext attack |
+| `services/net-proto`  | Network / Command Injection | Beginner-Intermediate | Bypass an incomplete blacklist to inject shell commands |
+| `services/pwn-format`  | Binary / Format String | Intermediate-Advanced | Arbitrary memory write via `printf()`'s own directives |
 
-More services are planned (see the changelog below) and the platform is
-built to make adding one straightforward — see `docs/ADDING_A_SERVICE.md`.
+More than one service of the same general category exists on purpose
+(e.g. two web bugs, two binary bugs) — a real competition rarely has
+just one of anything, and the plan is to keep adding more of each kind
+over time, not stop at one. See the changelog below for what's next,
+and `docs/ADDING_A_SERVICE.md` for how straightforward adding another
+one is meant to be.
 
 ## How a training session works
 
@@ -72,6 +85,10 @@ attack-and-defence/
 ├── services/
 │   ├── web-notes/             (SQL Injection)
 │   ├── pwn-baby/               (Stack Overflow / ret2win)
+│   ├── web-idor/               (Broken Access Control / IDOR)
+│   ├── crypto-xor/             (XOR key-reuse / chosen-plaintext)
+│   ├── net-proto/              (Command Injection)
+│   ├── pwn-format/             (Format String)
 │   └── _template/              (copy this to add a new service)
 ├── platform/
 │   ├── common/flagd.py         (shared flag-rotation sidecar)
@@ -91,9 +108,18 @@ attack-and-defence/
 - ✅ Round-based checker (SLA + flag planting)
 - ✅ Live scoreboard (defense uptime + attacker leaderboard)
 - ✅ Unified `docker-compose.yml` + scalability docs + service template
-- ⬜ A web service with a logic-based auth bypass (not SQLi)
-- ⬜ A custom network-protocol service (`nc`-style)
+- ✅ `web-idor` — Broken Access Control (IDOR) service
+- ✅ `crypto-xor` — XOR key-reuse / chosen-plaintext crypto service
+- ✅ `net-proto` — Command Injection (incomplete blacklist) service
+- ✅ `pwn-format` — Format String (arbitrary write) service
+- ⬜ A second web service with a logic-based auth bypass (not SQLi, not IDOR)
+- ⬜ A heap-based binary exploitation service (use-after-free / heap overflow)
+- ⬜ A second, harder crypto service (e.g. weak RSA parameters)
 - ⬜ Real multi-team isolation (see `docs/ARCHITECTURE.md`'s scaling section)
+
+This list keeps growing — the architecture (checker module contract +
+service template) is deliberately built so each new addition is a small,
+self-contained diff, not a rewrite.
 
 ## A note on how this was built
 

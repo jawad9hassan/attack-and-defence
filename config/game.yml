@@ -22,3 +22,27 @@ services:
     port: 9999
     flagd_port: 10000
     checker_module: pwn_baby_checker
+
+  - name: web-idor
+    host: web-idor
+    port: 5000
+    flagd_port: 10000
+    checker_module: web_idor_checker
+
+  - name: crypto-xor
+    host: crypto-xor
+    port: 9000
+    flagd_port: 10000
+    checker_module: crypto_xor_checker
+
+  - name: net-proto
+    host: net-proto
+    port: 9200
+    flagd_port: 10000
+    checker_module: net_proto_checker
+
+  - name: pwn-format
+    host: pwn-format
+    port: 9998
+    flagd_port: 10000
+    checker_module: pwn_format_checker

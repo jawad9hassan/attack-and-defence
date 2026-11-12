@@ -45,6 +45,54 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  web-idor:
+    build:
+      context: .
+      dockerfile: services/web-idor/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "5001:5000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
+  crypto-xor:
+    build:
+      context: .
+      dockerfile: services/crypto-xor/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "9000:9000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
+  net-proto:
+    build:
+      context: .
+      dockerfile: services/net-proto/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "9200:9200"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
+  pwn-format:
+    build:
+      context: .
+      dockerfile: services/pwn-format/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "9998:9998"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   checker:
     build:
       context: .
@@ -57,6 +105,10 @@ services:
       - scoreboard
       - web-notes
       - pwn-baby
+      - web-idor
+      - crypto-xor
+      - net-proto
+      - pwn-format
     restart: unless-stopped
 
 volumes:

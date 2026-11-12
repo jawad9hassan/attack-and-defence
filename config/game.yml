@@ -149,6 +149,12 @@ services:
     flagd_port: 10000
     checker_module: forensics_malware_triage_checker
 
+  - name: forensics-pcap-tls
+    host: forensics-pcap-tls
+    port: 5000
+    flagd_port: 10000
+    checker_module: forensics_pcap_tls_checker
+
   - name: net-rate-limit-bypass
     host: net-rate-limit-bypass
     port: 9600

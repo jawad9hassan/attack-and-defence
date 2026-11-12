@@ -273,6 +273,16 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  forensics-pcap-tls:
+    build:
+      context: .
+      dockerfile: services/forensics-pcap-tls/Dockerfile
+    ports:
+      - "9009:5000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   net-rate-limit-bypass:
     build:
       context: .
@@ -602,6 +612,7 @@ services:
       - forensics-metadata
       - forensics-timeline
       - forensics-malware-triage
+      - forensics-pcap-tls
       - net-rate-limit-bypass
       - net-ssrf-pivot
       - net-dns-spoof-sim

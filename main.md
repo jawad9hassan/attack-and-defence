@@ -160,7 +160,9 @@ input.
 | 7 | 9006 | ✅ [forensics-metadata](services/forensics-metadata/README.md) | Beginner-Intermediate | Flag leaked in a file's EXIF/document metadata |
 | 8 | 9007 | ✅ [forensics-timeline](services/forensics-timeline/README.md) | Advanced | Reconstructing an attack timeline from multiple log sources |
 | 9 | 9008 | ✅ [forensics-malware-triage](services/forensics-malware-triage/README.md) | Advanced | Static analysis of a "malicious" sample (blue-team flavored) |
-| 10 | 9009 | ⬜ `forensics-pcap-tls` | Advanced | Encrypted capture requiring key recovery or metadata analysis |
+| 10 | 9009 | ✅ [forensics-pcap-tls](services/forensics-pcap-tls/README.md) | Advanced | Encrypted capture requiring key recovery or metadata analysis |
+
+**🔍 Digital Forensics is now complete (10/10).**
 
 **Ladder:** `forensics-pcap-basic` is the flag sitting in plain text in
 one packet. `forensics-stego` hides it at the bit level inside an

@@ -3,11 +3,12 @@
 A small, scalable attack-defense CTF simulation, built for a five-person
 team training for a real A/D competition. One command brings up:
 
-- **Vulnerable services** you attack and defend (currently thirty,
+- **Vulnerable services** you attack and defend (currently forty-nine,
   covering web, binary, crypto, network-protocol, and digital-forensics
-  bug classes — each category is its own difficulty ladder, building
-  toward 10 rungs per category — designed to keep scaling: see
-  `docs/ADDING_A_SERVICE.md`)
+  bug classes — each category is its own difficulty ladder, with Web,
+  Cryptography, Network Protocols and Digital Forensics each already
+  at a full 10/10 rungs, Binary Exploitation & Reverse Engineering at
+  9/10 — designed to keep scaling: see `docs/ADDING_A_SERVICE.md`)
 - **A checker** that runs real, round-based game operations: it verifies
   each service's normal functionality, rotates its flag every round, and
   expires old flags — the same mechanics a real attack-defense gameserver
@@ -55,7 +56,7 @@ yourself, without handing you the exact payload.
 ## Services
 
 **See [`main.md`](main.md) for the full, up-to-date challenge index** —
-all thirty built services plus the full 10-per-category roadmap
+all forty-nine built services plus the full 10-per-category roadmap
 (built and planned), grouped by category, ordered easiest → hardest,
 each with a direct link to its own walkthrough. That file is the
 single source of truth for "what challenges exist, what's planned next,
@@ -190,6 +191,49 @@ attack-and-defence/
   (Binary/RE ladder, rung 4)
 - ✅ `re-packed` — unpacking a self-extracting packed binary before
   analyzing it (Binary/RE ladder, rung 5)
+- ✅ `pwn-canary-bypass` — brute-forcing a per-process stack canary
+  shared across forked children (Binary/RE ladder, rung 6)
+- ✅ `pwn-heap` — heap buffer overflow corrupting an adjacent function
+  pointer in the same chunk (Binary/RE ladder, rung 7)
+- ✅ `pwn-ret2libc` — leaking a libc address via `puts(GOT)` and
+  calling `system("/bin/sh")` (Binary/RE ladder, rung 8)
+- ✅ `pwn-rop-chain` — multi-gadget ROP chain setting up a
+  three-argument validated `win()` call (Binary/RE ladder, rung 9;
+  `re-mobile-apk`, rung 10, remains unbuilt — needs Android SDK
+  tooling not available in every build environment)
+- ✅ `net-ssrf-pivot` — SSRF/CONNECT relay with no destination
+  allowlist reaching an internal-only admin service (Network ladder,
+  rung 5)
+- ✅ `net-dns-spoof-sim` — predictable sequential DNS transaction IDs
+  enabling response spoofing (Network ladder, rung 6)
+- ✅ `net-tls-downgrade` — handshake negotiation that follows the
+  client's version preference instead of the server's, plus an
+  independent access-control gap (Network ladder, rung 7)
+- ✅ `net-protocol-fuzzing` — Heartbleed-style length-prefixed
+  protocol over-read (Network ladder, rung 8)
+- ✅ `net-arp-spoof-sim` — unvalidated ARP announcements redirecting a
+  simulated LAN reply (Network ladder, rung 9)
+- ✅ `net-c2-beacon-analysis` — spotting a perfectly periodic beacon
+  among irregular normal traffic in a pcap (Network ladder, rung 10
+  — **Network Protocols category now complete, 10/10**)
+- ✅ `forensics-memory-dump` — spotting a typosquatted process name in
+  a fabricated memory image (Forensics ladder, rung 4)
+- ✅ `forensics-disk-image` — recovering a deleted file whose data
+  region was never actually erased (Forensics ladder, rung 5)
+- ✅ `forensics-log-analysis` — finding a brute-force burst and the
+  post-compromise command that followed it in an auth log (Forensics
+  ladder, rung 6)
+- ✅ `forensics-metadata` — a flag leaked through PNG text metadata
+  rather than anything in the pixels (Forensics ladder, rung 7)
+- ✅ `forensics-timeline` — correlating a single attack chain across
+  three independent log sources by IP and timestamp (Forensics
+  ladder, rung 8)
+- ✅ `forensics-malware-triage` — brute-forcing a single-byte XOR key
+  obfuscating a fabricated malware sample's configuration (Forensics
+  ladder, rung 9)
+- ✅ `forensics-pcap-tls` — recovering a session key derived entirely
+  from values visible in a handshake capture (Forensics ladder,
+  rung 10 — **Digital Forensics category now complete, 10/10**)
 - ⬜ Every category is building toward 10 rungs — see `main.md` for the
   full named, ported backlog (⬜ rows) for Web, Crypto, Binary/RE,
   Network, and Forensics

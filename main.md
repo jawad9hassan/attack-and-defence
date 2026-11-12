@@ -67,7 +67,7 @@ next.
 | 7 | 5006 | ✅ [web-xss-stored](services/web-xss-stored/README.md) | Intermediate | Stored XSS — exfiltrate an admin's cookie, then use it |
 | 8 | 5007 | ✅ [web-ssrf](services/web-ssrf/README.md) | Intermediate-Advanced | Server-Side Request Forgery reaching an internal-only endpoint |
 | 9 | 5008 | ✅ [web-path-traversal](services/web-path-traversal/README.md) | Intermediate | Directory/path traversal to read `/flag.txt` directly |
-| 10 | 5009 | ⬜ `web-api-mass-assignment` | Advanced | API accepts unexpected fields (e.g. `"role":"admin"`) on signup |
+| 10 | 5009 | ✅ [web-api-mass-assignment](services/web-api-mass-assignment/README.md) | Advanced | API accepts unexpected fields (e.g. `"role":"admin"`) on signup |
 
 **SQLi ladder:** `web-notes` → `web-sqli-union` → `web-sqli-blind`. Each
 step removes a crutch the last one gave you (visible error → generic
@@ -75,6 +75,8 @@ error → no signal but true/false at all). `web-idor` is a standalone
 entry point into this category — do it first, it needs the least
 setup. `web-authbypass-jwt` is a different bug family (broken
 authentication/API security) rather than another SQLi rung.
+
+**🌐 Web & Application Security is now complete (10/10).**
 
 ## 🔐 Cryptography (`6000`–`6999`)
 

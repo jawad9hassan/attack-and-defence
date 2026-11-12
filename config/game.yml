@@ -142,3 +142,9 @@ services:
     port: 5000
     flagd_port: 10000
     checker_module: web_path_traversal_checker
+
+  - name: web-api-mass-assignment
+    host: web-api-mass-assignment
+    port: 5000
+    flagd_port: 10000
+    checker_module: web_api_mass_assignment_checker

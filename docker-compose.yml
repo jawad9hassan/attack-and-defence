@@ -271,6 +271,18 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  web-api-mass-assignment:
+    build:
+      context: .
+      dockerfile: services/web-api-mass-assignment/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "5009:5000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   checker:
     build:
       context: .
@@ -303,6 +315,7 @@ services:
       - web-xss-stored
       - web-ssrf
       - web-path-traversal
+      - web-api-mass-assignment
     restart: unless-stopped
 
 volumes:

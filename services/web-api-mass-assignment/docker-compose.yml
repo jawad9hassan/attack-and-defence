@@ -1,0 +1,11 @@
+services:
+  web-api-mass-assignment:
+    build:
+      context: ../..
+      dockerfile: services/web-api-mass-assignment/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "5009:5000"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

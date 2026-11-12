@@ -190,3 +190,9 @@ services:
     port: 9995
     flagd_port: 10000
     checker_module: crypto_timing_checker
+
+  - name: re-anti-debug
+    host: re-anti-debug
+    port: 9996
+    flagd_port: 10000
+    checker_module: re_anti_debug_checker

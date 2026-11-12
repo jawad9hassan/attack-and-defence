@@ -110,7 +110,7 @@ explains why.
 | 1 | 7000 | ✅ [re-crackme](services/re-crackme/README.md) | Beginner | Static analysis — `strings`, `objdump`, no exploitation |
 | 2 | 7001 | ✅ [pwn-baby](services/pwn-baby/README.md) | Intermediate | Stack buffer overflow — ret2win |
 | 3 | 7002 | ✅ [pwn-format](services/pwn-format/README.md) | Intermediate-Advanced | Format string — arbitrary memory write |
-| 4 | 7003 | ⬜ `re-anti-debug` | Intermediate | Bypassing simple anti-debugging checks |
+| 4 | 7003 | ✅ [re-anti-debug](services/re-anti-debug/README.md) | Intermediate | Bypassing a ptrace-based anti-debugging check |
 | 5 | 7004 | ⬜ `re-packed` | Intermediate | Unpacking a UPX-packed binary before analyzing it |
 | 6 | 7005 | ⬜ `pwn-canary-bypass` | Advanced | Leaking and bypassing a stack canary |
 | 7 | 7006 | ⬜ `pwn-heap` | Advanced | Basic heap overflow / use-after-free |

@@ -186,6 +186,8 @@ attack-and-defence/
 - ✅ `crypto-timing` — timing side-channel on a naive string comparison
   (Crypto ladder, rung 10 — **Cryptography category now complete,
   10/10**)
+- ✅ `re-anti-debug` — bypassing a ptrace-based anti-debugging check
+  (Binary/RE ladder, rung 4)
 - ⬜ Every category is building toward 10 rungs — see `main.md` for the
   full named, ported backlog (⬜ rows) for Web, Crypto, Binary/RE,
   Network, and Forensics

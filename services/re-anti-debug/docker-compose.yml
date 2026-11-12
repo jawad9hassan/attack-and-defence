@@ -1,0 +1,11 @@
+services:
+  re-anti-debug:
+    build:
+      context: ../..
+      dockerfile: services/re-anti-debug/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "7003:9996"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

@@ -1,0 +1,11 @@
+services:
+  net-auth:
+    build:
+      context: ../..
+      dockerfile: services/net-auth/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "8000:9400"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

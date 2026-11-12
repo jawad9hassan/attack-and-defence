@@ -64,7 +64,7 @@ next.
 | 4 | 5003 | ✅ [web-sqli-blind](services/web-sqli-blind/README.md) | Intermediate | SQL Injection — blind boolean, no errors shown |
 | 5 | 5004 | ✅ [web-authbypass-jwt](services/web-authbypass-jwt/README.md) | Intermediate | Broken auth — JWT "alg: none" forgery |
 | 6 | 5005 | ✅ [web-idor-tokens](services/web-idor-tokens/README.md) | Intermediate | Harder IDOR — share-link token is a bare hash of a public value (username), no secret |
-| 7 | 5006 | ⬜ `web-xss-stored` | Intermediate | Stored XSS — exfiltrate an admin's cookie |
+| 7 | 5006 | ✅ [web-xss-stored](services/web-xss-stored/README.md) | Intermediate | Stored XSS — exfiltrate an admin's cookie, then use it |
 | 8 | 5007 | ⬜ `web-ssrf` | Intermediate-Advanced | Server-Side Request Forgery reaching an internal-only endpoint |
 | 9 | 5008 | ⬜ `web-path-traversal` | Intermediate | Directory/path traversal to read `/flag.txt` directly |
 | 10 | 5009 | ⬜ `web-api-mass-assignment` | Advanced | API accepts unexpected fields (e.g. `"role":"admin"`) on signup |

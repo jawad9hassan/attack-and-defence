@@ -124,3 +124,9 @@ services:
     port: 5000
     flagd_port: 10000
     checker_module: web_idor_tokens_checker
+
+  - name: web-xss-stored
+    host: web-xss-stored
+    port: 5000
+    flagd_port: 10000
+    checker_module: web_xss_stored_checker

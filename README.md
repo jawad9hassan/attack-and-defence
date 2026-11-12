@@ -162,6 +162,8 @@ attack-and-defence/
 - ✅ `platform/common/pcap_writer.py` — dependency-free pcap-file builder shared by both PCAP challenges
 - ✅ `web-idor-tokens` — predictable share-link tokens (hash of a public
   value, no secret) (Web ladder, rung 6)
+- ✅ `web-xss-stored` — stored XSS, admin-cookie exfiltration (Web
+  ladder, rung 7)
 - ⬜ Every category is building toward 10 rungs — see `main.md` for the
   full named, ported backlog (⬜ rows) for Web, Crypto, Binary/RE,
   Network, and Forensics

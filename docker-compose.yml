@@ -261,6 +261,18 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  net-protocol-fuzzing:
+    build:
+      context: .
+      dockerfile: services/net-protocol-fuzzing/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "8007:6005"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   web-idor-tokens:
     build:
       context: .
@@ -506,6 +518,7 @@ services:
       - net-ssrf-pivot
       - net-dns-spoof-sim
       - net-tls-downgrade
+      - net-protocol-fuzzing
       - web-idor-tokens
       - web-xss-stored
       - web-ssrf

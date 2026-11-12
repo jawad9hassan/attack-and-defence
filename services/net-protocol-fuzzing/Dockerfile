@@ -1,0 +1,26 @@
+# Build context is the REPO ROOT (see docker-compose.yml: context ../..).
+
+FROM python:3.11-slim
+
+RUN useradd -m -s /usr/sbin/nologin player
+WORKDIR /service
+
+COPY services/net-protocol-fuzzing/src/echo_proto.py .
+
+COPY platform/common/flagd.py /opt/flagd.py
+COPY services/net-protocol-fuzzing/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ARG INITIAL_FLAG=FLAG{waiting_for_first_round}
+ENV FLAG_PATH="/flag.txt"
+ENV FLAGD_PORT="10000"
+ENV ECHO_PROTO_PORT="6005"
+RUN echo "$INITIAL_FLAG" > /flag.txt && chown player:player /flag.txt && chmod 644 /flag.txt
+
+EXPOSE 6005
+# FLAGD_PORT (10000) is intentionally NOT exposed/published anywhere in
+# docker-compose.yml: it must only be reachable from the checker's
+# container on the internal Docker network.
+
+USER player
+CMD ["/entrypoint.sh"]

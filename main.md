@@ -134,7 +134,7 @@ thing on the platform today — do it last of the three that exist.
 | 5 | 8004 | ✅ [net-ssrf-pivot](services/net-ssrf-pivot/README.md) | Intermediate-Advanced | Using one exposed service to reach an internal-only one |
 | 6 | 8005 | ✅ [net-dns-spoof-sim](services/net-dns-spoof-sim/README.md) | Advanced | Simulated DNS cache poisoning exercise |
 | 7 | 8006 | ✅ [net-tls-downgrade](services/net-tls-downgrade/README.md) | Advanced | Forcing a weak/no-encryption protocol fallback |
-| 8 | 8007 | ⬜ `net-protocol-fuzzing` | Advanced | Crash/info-leak from malformed protocol input |
+| 8 | 8007 | ✅ [net-protocol-fuzzing](services/net-protocol-fuzzing/README.md) | Advanced | Crash/info-leak from malformed protocol input |
 | 9 | 8008 | ⬜ `net-arp-spoof-sim` | Advanced | Simulated on-path (ARP spoofing) attacker exercise |
 | 10 | 8009 | ⬜ `net-c2-beacon-analysis` | Advanced (blue-team) | Spotting malicious beacon traffic in a capture |
 

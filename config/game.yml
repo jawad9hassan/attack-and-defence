@@ -137,6 +137,12 @@ services:
     flagd_port: 10000
     checker_module: net_tls_downgrade_checker
 
+  - name: net-protocol-fuzzing
+    host: net-protocol-fuzzing
+    port: 6005
+    flagd_port: 10000
+    checker_module: net_protocol_fuzzing_checker
+
   - name: web-idor-tokens
     host: web-idor-tokens
     port: 5000

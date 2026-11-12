@@ -1,0 +1,11 @@
+services:
+  crypto-weak-rsa:
+    build:
+      context: ../..
+      dockerfile: services/crypto-weak-rsa/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "6002:9300"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

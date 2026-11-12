@@ -1,0 +1,11 @@
+services:
+  pwn-rop-chain:
+    build:
+      context: ../..
+      dockerfile: services/pwn-rop-chain/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "7008:9989"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

@@ -220,3 +220,9 @@ services:
     port: 9990
     flagd_port: 10000
     checker_module: pwn_ret2libc_checker
+
+  - name: pwn-rop-chain
+    host: pwn-rop-chain
+    port: 9989
+    flagd_port: 10000
+    checker_module: pwn_rop_chain_checker

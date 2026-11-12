@@ -115,7 +115,7 @@ explains why.
 | 6 | 7005 | ✅ [pwn-canary-bypass](services/pwn-canary-bypass/README.md) | Advanced | Leaking and bypassing a stack canary |
 | 7 | 7006 | ✅ [pwn-heap](services/pwn-heap/README.md) | Advanced | Basic heap overflow / use-after-free |
 | 8 | 7007 | ✅ [pwn-ret2libc](services/pwn-ret2libc/README.md) | Advanced | Return-to-libc with ASLR/PIE enabled |
-| 9 | 7008 | ⬜ `pwn-rop-chain` | Advanced | Full ROP chain construction, no gift `win()` function |
+| 9 | 7008 | ✅ [pwn-rop-chain](services/pwn-rop-chain/README.md) | Advanced | Full ROP chain construction, no gift `win()` function |
 | 10 | 7009 | ⬜ `re-mobile-apk` | Advanced | Basic Android APK reverse engineering |
 
 **Ladder:** `re-crackme` teaches the tools (reading a binary's data and

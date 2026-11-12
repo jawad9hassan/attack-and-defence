@@ -130,3 +130,9 @@ services:
     port: 5000
     flagd_port: 10000
     checker_module: web_xss_stored_checker
+
+  - name: web-ssrf
+    host: web-ssrf
+    port: 5000
+    flagd_port: 10000
+    checker_module: web_ssrf_checker

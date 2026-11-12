@@ -1,0 +1,11 @@
+services:
+  web-ssrf:
+    build:
+      context: ../..
+      dockerfile: services/web-ssrf/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "5007:5000"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

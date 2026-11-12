@@ -247,6 +247,18 @@ services:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
 
+  web-ssrf:
+    build:
+      context: .
+      dockerfile: services/web-ssrf/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "5007:5000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
   checker:
     build:
       context: .
@@ -277,6 +289,7 @@ services:
       - net-rate-limit-bypass
       - web-idor-tokens
       - web-xss-stored
+      - web-ssrf
     restart: unless-stopped
 
 volumes:

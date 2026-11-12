@@ -136,3 +136,9 @@ services:
     port: 5000
     flagd_port: 10000
     checker_module: web_ssrf_checker
+
+  - name: web-path-traversal
+    host: web-path-traversal
+    port: 5000
+    flagd_port: 10000
+    checker_module: web_path_traversal_checker

@@ -1,0 +1,11 @@
+services:
+  web-path-traversal:
+    build:
+      context: ../..
+      dockerfile: services/web-path-traversal/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "5008:5000"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

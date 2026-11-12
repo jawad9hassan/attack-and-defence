@@ -166,6 +166,8 @@ attack-and-defence/
   ladder, rung 7)
 - ✅ `web-ssrf` — SSRF reaching an internal-only admin API (Web ladder,
   rung 8)
+- ✅ `web-path-traversal` — directory traversal reading `/flag.txt`
+  directly (Web ladder, rung 9)
 - ⬜ Every category is building toward 10 rungs — see `main.md` for the
   full named, ported backlog (⬜ rows) for Web, Crypto, Binary/RE,
   Network, and Forensics

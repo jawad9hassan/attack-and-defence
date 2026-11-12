@@ -1,0 +1,1 @@
+Welcome to FileDrop! Browse available notes with ?file=<name>.

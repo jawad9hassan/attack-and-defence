@@ -1,0 +1,2 @@
+v1.0 - initial release of FileDrop note viewer.
+v1.1 - added a changelog note, because why not.

@@ -66,7 +66,7 @@ next.
 | 6 | 5005 | ✅ [web-idor-tokens](services/web-idor-tokens/README.md) | Intermediate | Harder IDOR — share-link token is a bare hash of a public value (username), no secret |
 | 7 | 5006 | ✅ [web-xss-stored](services/web-xss-stored/README.md) | Intermediate | Stored XSS — exfiltrate an admin's cookie, then use it |
 | 8 | 5007 | ✅ [web-ssrf](services/web-ssrf/README.md) | Intermediate-Advanced | Server-Side Request Forgery reaching an internal-only endpoint |
-| 9 | 5008 | ⬜ `web-path-traversal` | Intermediate | Directory/path traversal to read `/flag.txt` directly |
+| 9 | 5008 | ✅ [web-path-traversal](services/web-path-traversal/README.md) | Intermediate | Directory/path traversal to read `/flag.txt` directly |
 | 10 | 5009 | ⬜ `web-api-mass-assignment` | Advanced | API accepts unexpected fields (e.g. `"role":"admin"`) on signup |
 
 **SQLi ladder:** `web-notes` → `web-sqli-union` → `web-sqli-blind`. Each

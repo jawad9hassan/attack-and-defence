@@ -4,6 +4,6 @@ services:
       context: ../..
       dockerfile: services/web-idor/Dockerfile
     ports:
-      - "5001:5000"
+      - "5000:5000"
     environment:
       - FLAGD_SECRET=standalone-dev-secret

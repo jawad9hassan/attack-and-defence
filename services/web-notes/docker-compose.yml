@@ -4,7 +4,7 @@ services:
       context: ../..
       dockerfile: services/web-notes/Dockerfile
     ports:
-      - "5000:5000"
+      - "5001:5000"
     environment:
       - ADMIN_PASSWORD=sup3rSecretAdminPW!
       - FLAGD_SECRET=standalone-dev-secret

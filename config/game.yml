@@ -76,3 +76,39 @@ services:
     port: 5000
     flagd_port: 10000
     checker_module: forensics_stego_checker
+
+  - name: web-authbypass-jwt
+    host: web-authbypass-jwt
+    port: 5000
+    flagd_port: 10000
+    checker_module: web_authbypass_jwt_checker
+
+  - name: crypto-weak-rsa
+    host: crypto-weak-rsa
+    port: 9300
+    flagd_port: 10000
+    checker_module: crypto_weak_rsa_checker
+
+  - name: net-auth
+    host: net-auth
+    port: 9400
+    flagd_port: 10000
+    checker_module: net_auth_checker
+
+  - name: net-replay
+    host: net-replay
+    port: 9500
+    flagd_port: 10000
+    checker_module: net_replay_checker
+
+  - name: forensics-pcap-basic
+    host: forensics-pcap-basic
+    port: 5000
+    flagd_port: 10000
+    checker_module: forensics_pcap_basic_checker
+
+  - name: forensics-pcap-ftp
+    host: forensics-pcap-ftp
+    port: 5000
+    flagd_port: 10000
+    checker_module: forensics_pcap_ftp_checker

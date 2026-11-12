@@ -25,7 +25,7 @@ services:
       context: .
       dockerfile: services/web-notes/Dockerfile
     ports:
-      - "5000:5000"
+      - "5001:5000"
     environment:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-sup3rSecretAdminPW!}
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
@@ -40,7 +40,7 @@ services:
       args:
         INITIAL_FLAG: "FLAG{waiting_for_first_round}"
     ports:
-      - "9999:9999"
+      - "7001:9999"
     environment:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
@@ -52,7 +52,7 @@ services:
       args:
         INITIAL_FLAG: "FLAG{waiting_for_first_round}"
     ports:
-      - "5001:5000"
+      - "5000:5000"
     environment:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
@@ -64,7 +64,7 @@ services:
       args:
         INITIAL_FLAG: "FLAG{waiting_for_first_round}"
     ports:
-      - "9000:9000"
+      - "6001:9000"
     environment:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
@@ -76,7 +76,7 @@ services:
       args:
         INITIAL_FLAG: "FLAG{waiting_for_first_round}"
     ports:
-      - "9200:9200"
+      - "8001:9200"
     environment:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
@@ -88,7 +88,7 @@ services:
       args:
         INITIAL_FLAG: "FLAG{waiting_for_first_round}"
     ports:
-      - "9998:9998"
+      - "7002:9998"
     environment:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
@@ -120,7 +120,7 @@ services:
       args:
         INITIAL_FLAG: "FLAG{waiting_for_first_round}"
     ports:
-      - "9100:9100"
+      - "6000:9100"
     environment:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
@@ -132,7 +132,7 @@ services:
       args:
         INITIAL_FLAG: "FLAG{waiting_for_first_round}"
     ports:
-      - "9997:9997"
+      - "7000:9997"
     environment:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
@@ -142,7 +142,73 @@ services:
       context: .
       dockerfile: services/forensics-stego/Dockerfile
     ports:
+      - "9001:5000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
+  web-authbypass-jwt:
+    build:
+      context: .
+      dockerfile: services/web-authbypass-jwt/Dockerfile
+    ports:
       - "5004:5000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
+  crypto-weak-rsa:
+    build:
+      context: .
+      dockerfile: services/crypto-weak-rsa/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "6002:9300"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
+  net-auth:
+    build:
+      context: .
+      dockerfile: services/net-auth/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "8000:9400"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
+  net-replay:
+    build:
+      context: .
+      dockerfile: services/net-replay/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "8002:9500"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
+  forensics-pcap-basic:
+    build:
+      context: .
+      dockerfile: services/forensics-pcap-basic/Dockerfile
+    ports:
+      - "9000:5000"
+    environment:
+      - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
+    restart: unless-stopped
+
+  forensics-pcap-ftp:
+    build:
+      context: .
+      dockerfile: services/forensics-pcap-ftp/Dockerfile
+    ports:
+      - "9002:5000"
     environment:
       - FLAGD_SECRET=${FLAGD_SECRET:-change-me-flagd-secret}
     restart: unless-stopped
@@ -168,6 +234,12 @@ services:
       - crypto-encoding
       - re-crackme
       - forensics-stego
+      - web-authbypass-jwt
+      - crypto-weak-rsa
+      - net-auth
+      - net-replay
+      - forensics-pcap-basic
+      - forensics-pcap-ftp
     restart: unless-stopped
 
 volumes:

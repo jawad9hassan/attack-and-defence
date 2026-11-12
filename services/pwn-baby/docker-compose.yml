@@ -6,6 +6,6 @@ services:
       args:
         INITIAL_FLAG: "FLAG{waiting_for_first_round}"
     ports:
-      - "9999:9999"
+      - "7001:9999"
     environment:
       - FLAGD_SECRET=standalone-dev-secret

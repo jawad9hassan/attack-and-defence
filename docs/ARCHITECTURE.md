@@ -14,7 +14,7 @@
                  ▼                   ▼                   ▼
         ┌────────────────┐  ┌────────────────┐  ┌─────────────────┐
         │   web-notes     │  │   pwn-baby      │  │   scoreboard     │
-        │  (public:5000)  │  │  (public:9999)  │  │  (public:8080)   │
+        │  (public:5001)  │  │  (public:7001)  │  │  (public:8080)   │
         │  flagd:10000    │  │  flagd:10000    │  │                  │
         │  (internal only)│  │  (internal only)│  │  flags, rounds,  │
         └────────────────┘  └────────────────┘  │  leaderboard DB  │

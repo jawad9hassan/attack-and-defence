@@ -3,10 +3,11 @@
 A small, scalable attack-defense CTF simulation, built for a five-person
 team training for a real A/D competition. One command brings up:
 
-- **Vulnerable services** you attack and defend (currently eleven,
+- **Vulnerable services** you attack and defend (currently seventeen,
   covering web, binary, crypto, network-protocol, and digital-forensics
-  bug classes — several as difficulty ladders within one category —
-  designed to keep scaling: see `docs/ADDING_A_SERVICE.md`)
+  bug classes — each category is its own difficulty ladder, building
+  toward 10 rungs per category — designed to keep scaling: see
+  `docs/ADDING_A_SERVICE.md`)
 - **A checker** that runs real, round-based game operations: it verifies
   each service's normal functionality, rotates its flag every round, and
   expires old flags — the same mechanics a real attack-defense gameserver
@@ -42,19 +43,27 @@ yourself, without handing you the exact payload.
 ## Services
 
 **See [`main.md`](main.md) for the full, up-to-date challenge index** —
-all eleven services, grouped by category, ordered easiest → hardest,
-each with a direct link to its own walkthrough. That file is the single
-source of truth for "what challenges exist and in what order"; this
-README won't duplicate the table and risk it going stale.
+all seventeen built services plus the full 10-per-category roadmap
+(built and planned), grouped by category, ordered easiest → hardest,
+each with a direct link to its own walkthrough. That file is the
+single source of truth for "what challenges exist, what's planned next,
+and in what order"; this README won't duplicate the table and risk it
+going stale.
 
 More than one service per category is intentional, organized as
-**difficulty ladders** (e.g. three SQLi challenges of increasing
-difficulty, three binary-exploitation challenges) rather than one-off
-duplicates — a real competition rarely has just one of anything, and
-the plan is to keep adding rungs and whole new categories over time.
-See `main.md`'s "What's next" section for what's planned, and
-`docs/ADDING_A_SERVICE.md` for how straightforward adding another one
-is meant to be.
+**difficulty ladders** (e.g. five web challenges, three crypto
+challenges, three network challenges, each of increasing difficulty)
+rather than one-off duplicates — a real competition rarely has just one
+of anything. Every category is explicitly building toward 10 rungs;
+`main.md` lists the still-unbuilt slots by name and port so the plan is
+visible even before each one exists. See `docs/ADDING_A_SERVICE.md` for
+how straightforward adding another one is meant to be.
+
+Also new this round: a dedicated **port scheme** — each category owns
+a 1000-port block (`5000`s = Web, `6000`s = Crypto, `7000`s =
+Binary/RE, `8000`s = Network, `9000`s = Forensics), so you can tell a
+challenge's category from its port alone. See `main.md`'s "Port
+scheme" section.
 
 ## How a training session works
 
@@ -84,17 +93,23 @@ attack-and-defence/
 ├── docker-compose.yml        ← brings up everything together
 ├── config/game.yml           ← round timing, flag lifetime, service registry
 ├── services/
-│   ├── web-notes/             (SQL Injection, ladder rung 1/3)
-│   ├── web-sqli-union/        (SQL Injection, ladder rung 2/3)
-│   ├── web-sqli-blind/        (SQL Injection, ladder rung 3/3)
-│   ├── web-idor/               (Broken Access Control / IDOR)
-│   ├── re-crackme/             (Reverse Engineering, ladder rung 1/3)
-│   ├── pwn-baby/               (Stack Overflow / ret2win, ladder rung 2/3)
-│   ├── pwn-format/             (Format String, ladder rung 3/3)
-│   ├── crypto-encoding/        (Layered encoding, ladder rung 1/2)
-│   ├── crypto-xor/             (XOR key-reuse / chosen-plaintext, ladder rung 2/2)
-│   ├── net-proto/              (Command Injection)
-│   ├── forensics-stego/        (LSB Steganography)
+│   ├── web-idor/               (Broken Access Control / IDOR, 5000)
+│   ├── web-notes/              (SQL Injection, 5001, ladder rung 1/5)
+│   ├── web-sqli-union/         (SQL Injection, 5002, ladder rung 2/5)
+│   ├── web-sqli-blind/         (SQL Injection, 5003, ladder rung 3/5)
+│   ├── web-authbypass-jwt/     (Broken Auth / JWT forgery, 5004)
+│   ├── crypto-encoding/        (Layered encoding, 6000, ladder rung 1/3)
+│   ├── crypto-xor/             (XOR key-reuse, 6001, ladder rung 2/3)
+│   ├── crypto-weak-rsa/        (RSA shared-prime break, 6002, ladder rung 3/3)
+│   ├── re-crackme/             (Reverse Engineering, 7000, ladder rung 1/3)
+│   ├── pwn-baby/               (Stack Overflow / ret2win, 7001, ladder rung 2/3)
+│   ├── pwn-format/             (Format String, 7002, ladder rung 3/3)
+│   ├── net-auth/               (Default credentials, 8000, ladder rung 1/3)
+│   ├── net-proto/              (Command Injection, 8001, ladder rung 2/3)
+│   ├── net-replay/             (Replay attack, 8002, ladder rung 3/3)
+│   ├── forensics-pcap-basic/   (Plaintext capture, 9000, ladder rung 1/3)
+│   ├── forensics-stego/        (LSB Steganography, 9001, ladder rung 2/3)
+│   ├── forensics-pcap-ftp/     (Multi-stream capture, 9002, ladder rung 3/3)
 │   └── _template/              (copy this to add a new service)
 ├── platform/
 │   ├── common/flagd.py         (shared flag-rotation sidecar)
@@ -124,11 +139,18 @@ attack-and-defence/
 - ✅ `re-crackme` — intro reverse engineering (binary ladder, rung 1 of 3)
 - ✅ `forensics-stego` — LSB steganography (new category: digital forensics)
 - ✅ `main.md` — challenge index, grouped by category, easiest → hardest
-- ⬜ A second Broken Access Control challenge (harder than `web-idor`)
-- ⬜ A second Command Injection / network-protocol challenge
-- ⬜ A PCAP/network-traffic-analysis challenge (digital forensics ladder)
-- ⬜ A heap-based binary exploitation challenge (binary ladder, rung 4)
-- ⬜ A harder crypto challenge, e.g. weak RSA parameters (crypto ladder, rung 3)
+- ✅ Category-based port scheme (`5000`s Web, `6000`s Crypto, `7000`s
+  Binary/RE, `8000`s Network, `9000`s Forensics)
+- ✅ `web-authbypass-jwt` — broken auth, forging a JWT via `alg: none`
+- ✅ `crypto-weak-rsa` — RSA shared-prime key recovery (crypto ladder, rung 3)
+- ✅ `net-auth` — default/weak credentials (network ladder, rung 1)
+- ✅ `net-replay` — leaked static session token / replay attack (network ladder, rung 3)
+- ✅ `forensics-pcap-basic` — plaintext capture (forensics ladder, rung 1)
+- ✅ `forensics-pcap-ftp` — multi-stream capture analysis (forensics ladder, rung 3)
+- ✅ `platform/common/pcap_writer.py` — dependency-free pcap-file builder shared by both PCAP challenges
+- ⬜ Every category is building toward 10 rungs — see `main.md` for the
+  full named, ported backlog (⬜ rows) for Web, Crypto, Binary/RE,
+  Network, and Forensics
 - ⬜ Real multi-team isolation (see `docs/ARCHITECTURE.md`'s scaling section)
 
 This list keeps growing — the architecture (checker module contract +

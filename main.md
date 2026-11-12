@@ -91,7 +91,7 @@ authentication/API security) rather than another SQLi rung.
 | 7 | 6006 | ✅ [crypto-jwt-secret](services/crypto-jwt-secret/README.md) | Intermediate | Brute-forcing a weak HMAC secret (distinct from `web-authbypass-jwt`'s `alg:none` bug) |
 | 8 | 6007 | ✅ [crypto-nonce-reuse](services/crypto-nonce-reuse/README.md) | Advanced | Stream-cipher nonce reuse breaking confidentiality |
 | 9 | 6008 | ✅ [crypto-rsa-small-e](services/crypto-rsa-small-e/README.md) | Advanced | Low public exponent + no padding — cube-root recovery |
-| 10 | 6009 | ⬜ `crypto-timing` | Advanced | Timing side-channel on a naive string comparison |
+| 10 | 6009 | ✅ [crypto-timing](services/crypto-timing/README.md) | Advanced | Timing side-channel on a naive string comparison |
 
 **Ladder:** `crypto-encoding` has no key and nothing to break — it's
 encoding literacy. `crypto-xor` is the first challenge where you
@@ -100,6 +100,8 @@ actually defeat a cryptographic weakness (a reused symmetric key).
 flaw, not symmetric reuse). Don't confuse "hard to read" (rung 1) with
 "actually secure until it's broken" (rungs 2+) — rung 1's README
 explains why.
+
+**🔐 Cryptography is now complete (10/10).**
 
 ## 🔢 Binary Exploitation & Reverse Engineering (`7000`–`7999`)
 

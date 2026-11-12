@@ -3,7 +3,7 @@
 A small, scalable attack-defense CTF simulation, built for a five-person
 team training for a real A/D competition. One command brings up:
 
-- **Vulnerable services** you attack and defend (currently twenty-three,
+- **Vulnerable services** you attack and defend (currently thirty,
   covering web, binary, crypto, network-protocol, and digital-forensics
   bug classes — each category is its own difficulty ladder, building
   toward 10 rungs per category — designed to keep scaling: see
@@ -55,7 +55,7 @@ yourself, without handing you the exact payload.
 ## Services
 
 **See [`main.md`](main.md) for the full, up-to-date challenge index** —
-all twenty-three built services plus the full 10-per-category roadmap
+all thirty built services plus the full 10-per-category roadmap
 (built and planned), grouped by category, ordered easiest → hardest,
 each with a direct link to its own walkthrough. That file is the
 single source of truth for "what challenges exist, what's planned next,
@@ -183,6 +183,9 @@ attack-and-defence/
   confidentiality (Crypto ladder, rung 8)
 - ✅ `crypto-rsa-small-e` — low public exponent (e=3), no padding,
   integer cube-root recovery (Crypto ladder, rung 9)
+- ✅ `crypto-timing` — timing side-channel on a naive string comparison
+  (Crypto ladder, rung 10 — **Cryptography category now complete,
+  10/10**)
 - ⬜ Every category is building toward 10 rungs — see `main.md` for the
   full named, ported backlog (⬜ rows) for Web, Crypto, Binary/RE,
   Network, and Forensics

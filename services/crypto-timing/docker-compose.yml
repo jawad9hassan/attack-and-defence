@@ -1,0 +1,11 @@
+services:
+  crypto-timing:
+    build:
+      context: ../..
+      dockerfile: services/crypto-timing/Dockerfile
+      args:
+        INITIAL_FLAG: "FLAG{waiting_for_first_round}"
+    ports:
+      - "6009:9995"
+    environment:
+      - FLAGD_SECRET=standalone-dev-secret

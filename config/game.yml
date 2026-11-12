@@ -184,3 +184,9 @@ services:
     port: 9990
     flagd_port: 10000
     checker_module: crypto_rsa_small_e_checker
+
+  - name: crypto-timing
+    host: crypto-timing
+    port: 9995
+    flagd_port: 10000
+    checker_module: crypto_timing_checker
